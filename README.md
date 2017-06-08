@@ -1,2 +1,2 @@
 # ERPNextSharp
-ERPNext wrapper for C#
+ERPNext API wrapper for C#
