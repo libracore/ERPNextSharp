@@ -1,0 +1,6 @@
+[submodule "restsharp"]
+	path = restsharp
+	url = https://github.com/restsharp/restsharp.git
+[submodule "RestSharp"]
+	path = RestSharp
+	url = https://github.com/restsharp/RestSharp.git
