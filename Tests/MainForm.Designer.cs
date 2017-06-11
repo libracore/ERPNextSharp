@@ -58,6 +58,8 @@
             this.listCustomers = new System.Windows.Forms.ListBox();
             this.statusStrip1 = new System.Windows.Forms.StatusStrip();
             this.statusConnected = new System.Windows.Forms.ToolStripStatusLabel();
+            this.txtCustomerWebsite = new System.Windows.Forms.TextBox();
+            this.label9 = new System.Windows.Forms.Label();
             this.groupBox1.SuspendLayout();
             this.tabControl1.SuspendLayout();
             this.tabLogin.SuspendLayout();
@@ -190,6 +192,8 @@
             // 
             // tabCustomer
             // 
+            this.tabCustomer.Controls.Add(this.txtCustomerWebsite);
+            this.tabCustomer.Controls.Add(this.label9);
             this.tabCustomer.Controls.Add(this.btnDeleteCustomer);
             this.tabCustomer.Controls.Add(this.btnUpdateCustomer);
             this.tabCustomer.Controls.Add(this.btnInsertCustomer);
@@ -349,6 +353,22 @@
             this.statusConnected.Size = new System.Drawing.Size(102, 17);
             this.statusConnected.Text = "Not connected";
             // 
+            // txtCustomerWebsite
+            // 
+            this.txtCustomerWebsite.Location = new System.Drawing.Point(292, 164);
+            this.txtCustomerWebsite.Name = "txtCustomerWebsite";
+            this.txtCustomerWebsite.Size = new System.Drawing.Size(228, 20);
+            this.txtCustomerWebsite.TabIndex = 17;
+            // 
+            // label9
+            // 
+            this.label9.AutoSize = true;
+            this.label9.Location = new System.Drawing.Point(223, 167);
+            this.label9.Name = "label9";
+            this.label9.Size = new System.Drawing.Size(46, 13);
+            this.label9.TabIndex = 16;
+            this.label9.Text = "Website";
+            // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -405,6 +425,8 @@
         private System.Windows.Forms.Button btnDeleteCustomer;
         private System.Windows.Forms.Button btnUpdateCustomer;
         private System.Windows.Forms.Button btnInsertCustomer;
+        private System.Windows.Forms.TextBox txtCustomerWebsite;
+        private System.Windows.Forms.Label label9;
     }
 }
 

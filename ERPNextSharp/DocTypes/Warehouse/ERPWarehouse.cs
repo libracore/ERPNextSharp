@@ -5,34 +5,34 @@ namespace ERPNextSharp.DocTypes.Warehouse
 {
     public class ERPWarehouse : ERPNextObjectBase
     {
-        public ERPWarehouse() : this(new ERPObject(DocType.Item)) { }
-        public ERPWarehouse(ERPObject obj) : base(obj) { }
-
-        public static ERPItem Create(string itemName, string itemGroup)
+        #region constructor
+        public ERPWarehouse() : this(new ERPObject(DocType.Item))
         {
-            ERPItem result = new ERPItem();
-            result.item_name = itemName;
-            result.item_group = itemGroup;
-            return result;
         }
 
-        public string parent_warehouse
+        public ERPWarehouse(ERPObject obj) : base(obj)
+        {
+        }
+        #endregion
+
+        #region varîable access
+        public string ParentWarehouse
         {
             get { return data.parent_warehouse; }
             set { data.parent_warehouse = value; }
         }
 
-        public string warehouse_name
+        public string WarehouseName
         {
             get { return data.warehouse_name; }
             set { data.warehouse_name = value; }
         }
 
-        public string company
+        public string Company
         {
             get { return data.company; }
             set { data.company = value; }
         }
-
+        #endregion
     }
 }

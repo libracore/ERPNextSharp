@@ -164,11 +164,12 @@ namespace Tests
                 ERPObject obj = client.GetObject(DocType.Customer, customerName);
                 ERPCustomer customer = new ERPCustomer(obj);
 
-                txtCustomerName.Text = customer.customer_name;
-                txtCustomerGroup.Text = customer.customer_group;
-                txtCustomerStatus.Text = customer.status.ToString();
-                txtCustomerTerritory.Text = customer.territory;
-                txtCustomerType.Text = customer.customer_type.ToString();
+                txtCustomerName.Text = customer.CustomerName;
+                txtCustomerGroup.Text = customer.CustomerGroup;
+                txtCustomerStatus.Text = customer.Status.ToString();
+                txtCustomerTerritory.Text = customer.Territory;
+                txtCustomerType.Text = customer.CustomerType.ToString();
+                txtCustomerWebsite.Text = customer.Website;
             }
         }
 
@@ -216,32 +217,33 @@ namespace Tests
         private ERPCustomer getCustomerFromForm()
         {
             ERPCustomer customer = new ERPCustomer();
-            customer.customer_name = txtCustomerName.Text;
-            customer.customer_group = txtCustomerGroup.Text;
-            customer.territory = txtCustomerTerritory.Text;
+            customer.CustomerName = txtCustomerName.Text;
+            customer.CustomerGroup = txtCustomerGroup.Text;
+            customer.Territory = txtCustomerTerritory.Text;
+            customer.Website = txtCustomerWebsite.Text;
             if (txtCustomerType.Text == "Company")
             {
-                customer.customer_type = CustomerType.Company;
+                customer.CustomerType = CustomerTypes.Company;
             }
             else
             {
-                customer.customer_type = CustomerType.Individual;
+                customer.CustomerType = CustomerTypes.Individual;
             }
             if (txtCustomerStatus.Text == "Active")
             {
-                customer.status = CustomerStatus.Active;
+                customer.Status = CustomerStatuses.Active;
             }
             else if (txtCustomerStatus.Text == "Dormant")
             {
-                customer.status = CustomerStatus.Dormant;
+                customer.Status = CustomerStatuses.Dormant;
             }
             else if (txtCustomerStatus.Text == "Open")
             {
-                customer.status = CustomerStatus.Open;
+                customer.Status = CustomerStatuses.Open;
             }
             else
             {
-                customer.status = CustomerStatus.None;
+                customer.Status = CustomerStatuses.None;
             }
             return customer;
         }

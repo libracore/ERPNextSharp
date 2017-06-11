@@ -12,12 +12,12 @@ namespace ERPNextSharp.Data
 
         protected ERPNextObjectBase(ERPObject obj)
         {
-            this.Object = obj;
+            Object = obj;
         }
 
         protected dynamic data => Object.Data;
 
-        public string name
+        public string Name
         {
             get { return Object.Name; }
             set { Object.Name = value; }

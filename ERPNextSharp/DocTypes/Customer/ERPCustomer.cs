@@ -3,27 +3,23 @@
 namespace ERPNext.DocTypes.Customer
 {
     public class ERPCustomer : ERPNextObjectBase
-    {
-        public ERPCustomer() : this(new ERPObject(DocType.Customer)) { }
-        public ERPCustomer(ERPObject obj) : base(obj) { }
+    { 
+        #region constructor
+        public ERPCustomer() : this(new ERPObject(DocType.Customer))
+        { }
 
-        public static ERPCustomer Create(string fullName, CustomerType customerType, string customerGroup, string territory)
-        {
-            ERPCustomer obj = new ERPCustomer();
-            obj.customer_name = fullName;
-            obj.customer_type = customerType;
-            obj.customer_group = customerGroup;
-            obj.territory = territory;
-            return obj;
-        }
+        public ERPCustomer(ERPObject obj) : base(obj)
+        { }
+        #endregion
 
-        public CustomerType customer_type
+        #region variable access
+        public CustomerTypes CustomerType
         {
-            get { return parseEnum<CustomerType>(data.customer_type); }
+            get { return parseEnum<CustomerTypes>(data.customer_type); }
             set { data.customer_type = value.ToString(); }
         }
 
-        public string customer_name
+        public string CustomerName
         {
             get { return data.customer_name; }
             set
@@ -33,54 +29,57 @@ namespace ERPNext.DocTypes.Customer
             }
         }
 
-        public string customer_group
+        public string CustomerGroup
         {
             get { return data.customer_group; }
             set { data.customer_group = value; }
         }
 
-        public string website
+        public string Website
         {
             get { return data.website; }
             set { data.website = value; }
         }
 
-        public string territory
+        public string Territory
         {
             get { return data.territory; }
             set { data.territory = value; }
         }
 
-        public CustomerStatus status
+        public CustomerStatuses Status
         {
             get
             {
-                CustomerStatus s = CustomerStatus.None;
+                CustomerStatuses s = CustomerStatuses.None;
                 try
                 {
-                    s = parseEnum<CustomerStatus>(data.status);
+                    s = parseEnum<CustomerStatuses>(data.status);
                 }
                 catch
                 {
-                    s = CustomerStatus.None;
+                    s = CustomerStatuses.None;
                 }
                 return s;
             }
             set { data.status = value.ToString(); }
         }
+        #endregion
     }
 
-    public enum CustomerType
+    #region customer data types
+    public enum CustomerTypes
     {
         Company,
         Individual,
     }
 
-    public enum CustomerStatus
+    public enum CustomerStatuses
     {
         Active,
         Dormant,
         Open,
         None
     }
+    #endregion
 }

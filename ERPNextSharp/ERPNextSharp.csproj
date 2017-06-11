@@ -32,7 +32,7 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="RestSharp">
-      <HintPath>..\RestSharp\RestSharp.Net46\bin\Release\RestSharp.dll</HintPath>
+      <HintPath>..\external\RestSharp.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
@@ -48,19 +48,13 @@
     <Compile Include="Data\DocType.cs" />
     <Compile Include="Data\ERPFilter.cs" />
     <Compile Include="Data\ERPNextObjectBase.cs" />
-    <Compile Include="DocTypes\Customer\CustomerService.cs" />
     <Compile Include="DocTypes\Customer\ERPCustomer.cs" />
     <Compile Include="DocTypes\Item\ERPItem.cs" />
-    <Compile Include="DocTypes\Item\ItemService.cs" />
     <Compile Include="DocTypes\Warehouse\ERPWarehouse.cs" />
-    <Compile Include="DocTypes\Warehouse\WarehouseService.cs" />
     <Compile Include="ERPNextClient.cs" />
     <Compile Include="Data\ERPObject.cs" />
     <Compile Include="Data\FetchListOption.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Service\ERPNextService.cs" />
-    <Compile Include="Service\ISubServiceBase.cs" />
-    <Compile Include="Service\SubServiceBase.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
