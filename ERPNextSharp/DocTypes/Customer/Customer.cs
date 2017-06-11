@@ -2,13 +2,16 @@
 
 namespace ERPNext.DocTypes.Customer
 {
-    public class ERPCustomer : ERPNextObjectBase
+    /// <summary>
+    /// Reference: https://frappe.github.io/erpnext/current/models/selling/customer
+    /// </summary>
+    public class Customer : ERPNextObjectBase
     { 
         #region constructor
-        public ERPCustomer() : this(new ERPObject(DocType.Customer))
+        public Customer() : this(new ERPObject(DocType.Customer))
         { }
 
-        public ERPCustomer(ERPObject obj) : base(obj)
+        public Customer(ERPObject obj) : base(obj)
         { }
         #endregion
 

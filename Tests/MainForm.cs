@@ -162,7 +162,7 @@ namespace Tests
             if (client != null)
             {
                 ERPObject obj = client.GetObject(DocType.Customer, customerName);
-                ERPCustomer customer = new ERPCustomer(obj);
+                Customer customer = new Customer(obj);
 
                 txtCustomerName.Text = customer.CustomerName;
                 txtCustomerGroup.Text = customer.CustomerGroup;
@@ -208,15 +208,15 @@ namespace Tests
         {
             if (client != null)
             {
-                ERPCustomer customer = getCustomerFromForm();
+                Customer customer = getCustomerFromForm();
                 ERPObject obj = customer.Object;
                 client.UpdateObject(DocType.Customer, customerName, obj);
             }    
         }
 
-        private ERPCustomer getCustomerFromForm()
+        private Customer getCustomerFromForm()
         {
-            ERPCustomer customer = new ERPCustomer();
+            Customer customer = new Customer();
             customer.CustomerName = txtCustomerName.Text;
             customer.CustomerGroup = txtCustomerGroup.Text;
             customer.Territory = txtCustomerTerritory.Text;
@@ -260,7 +260,7 @@ namespace Tests
         {
             if (client != null)
             {
-                ERPCustomer customer = getCustomerFromForm();
+                Customer customer = getCustomerFromForm();
                 ERPObject obj = customer.Object;
                 client.InsertObject(obj);
 

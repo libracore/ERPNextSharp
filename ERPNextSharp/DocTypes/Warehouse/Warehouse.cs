@@ -3,14 +3,17 @@ using ERPNextSharp.DocTypes.Item;
 
 namespace ERPNextSharp.DocTypes.Warehouse
 {
-    public class ERPWarehouse : ERPNextObjectBase
+    /// <summary>
+    /// Reference: https://frappe.github.io/erpnext/current/models/stock/warehouse
+    /// </summary>
+    public class Warehouse : ERPNextObjectBase
     {
         #region constructor
-        public ERPWarehouse() : this(new ERPObject(DocType.Item))
+        public Warehouse() : this(new ERPObject(DocType.Item))
         {
         }
 
-        public ERPWarehouse(ERPObject obj) : base(obj)
+        public Warehouse(ERPObject obj) : base(obj)
         {
         }
         #endregion

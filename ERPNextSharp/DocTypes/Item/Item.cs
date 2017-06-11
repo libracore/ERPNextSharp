@@ -5,14 +5,14 @@ namespace ERPNextSharp.DocTypes.Item
     /// <summary>
     /// Reference: https://frappe.github.io/erpnext/current/models/stock/item
     /// </summary>
-    public class ERPItem : ERPNextObjectBase
+    public class Item : ERPNextObjectBase
     {
         #region constructor
-        public ERPItem() : this(new ERPObject(DocType.Item))
+        public Item() : this(new ERPObject(DocType.Item))
         {
         }
 
-        public ERPItem(ERPObject obj) : base(obj)
+        public Item(ERPObject obj) : base(obj)
         {
         }
         #endregion

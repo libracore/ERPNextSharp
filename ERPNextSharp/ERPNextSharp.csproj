@@ -48,9 +48,10 @@
     <Compile Include="Data\DocType.cs" />
     <Compile Include="Data\ERPFilter.cs" />
     <Compile Include="Data\ERPNextObjectBase.cs" />
-    <Compile Include="DocTypes\Customer\ERPCustomer.cs" />
-    <Compile Include="DocTypes\Item\ERPItem.cs" />
-    <Compile Include="DocTypes\Warehouse\ERPWarehouse.cs" />
+    <Compile Include="DocTypes\Accounts\PaymentEntry.cs" />
+    <Compile Include="DocTypes\Customer\Customer.cs" />
+    <Compile Include="DocTypes\Item\Item.cs" />
+    <Compile Include="DocTypes\Warehouse\Warehouse.cs" />
     <Compile Include="ERPNextClient.cs" />
     <Compile Include="Data\ERPObject.cs" />
     <Compile Include="Data\FetchListOption.cs" />
