@@ -40,7 +40,15 @@ namespace ERPNext.DocTypes.Accounts
         /// </summary>
         public DateTime ReferenceDate
         {
-            get { return data.reference_date; }
+            get {
+                DateTime date = DateTime.Now;
+                try
+                {
+                    date = Convert.ToDateTime(data.reference_date);
+                }
+                catch { }
+                return date;
+            }
             set { data.reference_date = value; }
         }
 
@@ -97,7 +105,41 @@ namespace ERPNext.DocTypes.Accounts
             get { return data.party; }
             set { data.party = value; }
         }
+
+        /// <summary>
+        /// Payment type
+        /// </summary>
+        public PaymentTypes PaymentType
+        {
+            get
+            {
+                PaymentTypes t = PaymentTypes.Receive;
+                try
+                {
+                    t = parseEnum<PaymentTypes>(data.payment_type);
+                }
+                catch
+                {
+                    t = PaymentTypes.Receive;
+                }
+                return t;
+            }
+            set { data.payment_type = value.ToString(); }
+        }
+
+        public void SetPaymentType(string type)
+        {
+            data.payment_type = type;
+        }
         #endregion
     }
 
+    #region payment data types
+    public enum PaymentTypes
+    {
+        Receive,
+        Pay,
+        InternalTransfer
+    }
+    #endregion
 }

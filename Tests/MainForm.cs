@@ -10,6 +10,8 @@ using System.Windows.Forms;
 using ERPNextSharp;
 using ERPNextSharp.Data;
 using ERPNext.DocTypes.Customer;
+using ERPNext.DocTypes.Accounts;
+using System.IO;
 
 namespace Tests
 {
@@ -17,7 +19,7 @@ namespace Tests
     {
         #region global variables
         private ERPNextClient client;
-
+        private Config config;
         #endregion
 
         #region constructor
@@ -33,11 +35,27 @@ namespace Tests
 
         private void MainForm_Shown(object sender, EventArgs e)
         {
-            /* use this to preconfigure the form */
-            txtServer.Text   = "";
-            txtUsername.Text = "";
-            txtPassword.Text = "";
+            loadConfig();
 
+            cmbPaymentType.Items.Clear();
+            foreach (PaymentTypes type in Enum.GetValues(typeof(PaymentTypes)))
+            {
+                cmbPaymentType.Items.Add(type.ToString());
+            }
+        }
+
+        private void loadConfig()
+        {
+            // find config file
+            string appPath = (new FileInfo(Application.ExecutablePath)).DirectoryName;
+            string configPath = appPath + "\\config.xml";
+
+            // load config
+            config = new Config(configPath);
+
+            txtServer.Text = config.Server;
+            txtUsername.Text = config.Username;
+            txtPassword.Text = config.Password;
         }
         #endregion
 
@@ -66,12 +84,23 @@ namespace Tests
                     btnDisconnect.Enabled = true;
                     btnConnect.Enabled = false;
                     showConnected(true);
+                    postLoginHooks();
                 }
                 else
                 {
                     MessageBox.Show("Unable to connect.");
                 }
             }
+
+        }
+
+        /// <summary>
+        /// Extend here the functions to be executed after login
+        /// </summary>
+        private void postLoginHooks()
+        {
+            getCustomerList();
+            getPaymentEntryList();
 
         }
 
@@ -140,9 +169,11 @@ namespace Tests
                 List<ERPObject> customers = client.ListObjects(DocType.Customer);
 
                 listCustomers.Items.Clear();
+                cmbPaymentCustomer.Items.Clear();
                 foreach (ERPObject o in customers)
                 {
                     listCustomers.Items.Add(o.Name);
+                    cmbPaymentCustomer.Items.Add(o.Name);
                 }
             }
         }
@@ -170,6 +201,7 @@ namespace Tests
                 txtCustomerTerritory.Text = customer.Territory;
                 txtCustomerType.Text = customer.CustomerType.ToString();
                 txtCustomerWebsite.Text = customer.Website;
+                txtCustomerOwner.Text = customer.Owner;
             }
         }
 
@@ -221,6 +253,7 @@ namespace Tests
             customer.CustomerGroup = txtCustomerGroup.Text;
             customer.Territory = txtCustomerTerritory.Text;
             customer.Website = txtCustomerWebsite.Text;
+            customer.Owner = txtCustomerOwner.Text;
             if (txtCustomerType.Text == "Company")
             {
                 customer.CustomerType = CustomerTypes.Company;
@@ -268,5 +301,99 @@ namespace Tests
             }
         }
         #endregion
+
+        #region payment entries / transactions
+        private void btnGetPaymentEntries_Click(object sender, EventArgs e)
+        {
+            getPaymentEntryList();
+        }
+
+        private void getPaymentEntryList()
+        {
+            if (client != null)
+            {
+                List<ERPObject> paymnets = client.ListObjects(DocType.PaymentEntry);
+
+                listPaymentEntries.Items.Clear();
+                foreach (ERPObject o in paymnets)
+                {
+                    listPaymentEntries.Items.Add(o.Name);
+                }
+            }
+        }
+
+        private void btnInsertPaymentEntry_Click(object sender, EventArgs e)
+        {
+            insertPayment();
+        }
+
+        private PaymentEntry getPaymentFromForm()
+        {
+            PaymentEntry payment = new PaymentEntry();
+            payment.PartyType = txtPaymentPartyType.Text;
+            payment.PaidAmount = Convert.ToDouble(numPaymentAmount.Value);
+            payment.ReferenceNo = txtPaymentReference.Text;
+            payment.ReferenceDate = datePaymentDate.Value;
+            payment.Party = cmbPaymentCustomer.SelectedItem.ToString();
+            payment.SetPaymentType(cmbPaymentType.SelectedItem.ToString());
+            return payment;
+        }
+
+        private void insertPayment()
+        {
+            if (client != null)
+            {
+                PaymentEntry payment = getPaymentFromForm();
+                ERPObject obj = payment.Object;
+                client.InsertObject(obj);
+
+                getPaymentEntryList();
+            }
+        }
+
+        private void listPaymentEntries_DoubleClick(object sender, EventArgs e)
+        {
+            if (listPaymentEntries.SelectedItem != null)
+            {
+                string paymentName = listPaymentEntries.SelectedItem.ToString();
+
+                getPaymentInfo(paymentName);
+            }
+        }
+
+        private void getPaymentInfo(string paymentName)
+        {
+            if (client != null)
+            {
+                ERPObject obj = client.GetObject(DocType.PaymentEntry, paymentName);
+                PaymentEntry payment = new PaymentEntry(obj);
+
+                txtPaymentPartyType.Text = payment.PartyType;
+                numPaymentAmount.Value = Convert.ToDecimal(payment.PaidAmount);
+                txtPaymentReference.Text = payment.ReferenceNo;
+                datePaymentDate.Value = payment.ReferenceDate;
+
+                for (int i = 0; i < cmbPaymentCustomer.Items.Count; i++)
+                {
+                    if (cmbPaymentCustomer.Items[i].ToString() == payment.Party)
+                    {
+                        cmbPaymentCustomer.SelectedIndex = i;
+                        break;
+                    }
+                }
+
+                for (int i = 0; i < cmbPaymentType.Items.Count; i++)
+                {
+                    if (cmbPaymentType.Items[i].ToString() == payment.PaymentType.ToString())
+                    {
+                        cmbPaymentType.SelectedIndex = i;
+                        break;
+                    }
+                }
+            }
+        }
+
+        #endregion
+
     }
 }

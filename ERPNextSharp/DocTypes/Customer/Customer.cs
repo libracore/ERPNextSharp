@@ -40,7 +40,16 @@ namespace ERPNext.DocTypes.Customer
 
         public string Website
         {
-            get { return data.website; }
+            get
+            {
+                string website = string.Empty;
+                try
+                {
+                    website = data.website;
+                }
+                catch { }
+                return website;
+            }
             set { data.website = value; }
         }
 
@@ -48,6 +57,12 @@ namespace ERPNext.DocTypes.Customer
         {
             get { return data.territory; }
             set { data.territory = value; }
+        }
+
+        public string Owner
+        {
+            get { return data.owner; }
+            set { data.owner = value; }
         }
 
         public CustomerStatuses Status
