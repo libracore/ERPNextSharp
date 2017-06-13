@@ -9,11 +9,45 @@ namespace ERPNext.DocTypes.Accounts
     public class PaymentEntry : ERPNextObjectBase
     { 
         #region constructor
-        public PaymentEntry() : this(new ERPObject(DocType.Customer))
+        public PaymentEntry() 
+            : this(new ERPObject(DocType.PaymentEntry))
         { }
 
-        public PaymentEntry(ERPObject obj) : base(obj)
+        public PaymentEntry(ERPObject obj) 
+            : base(obj)
         { }
+
+        /// <summary>
+        /// Creates a new instance of a payment entry with minimal values to insert
+        /// </summary>
+        /// <param name="date">Date</param>
+        /// <param name="type">Payment type</param>
+        /// <param name="company">Transaction entity</param>
+        /// <param name="paidFromAccount">Source account</param>
+        /// <param name="paidToAccount">Destination account</param>
+        /// <param name="currency">Currency</param>
+        /// <param name="amount">Amount transferred</param>
+        /// <param name="partyType">Party type (customer, supplier, ...)</param>
+        /// <param name="party">Party name (customer, ...)</param>
+        /// <param name="referenceNo">Unique ID</param>
+        public PaymentEntry(DateTime date, PaymentTypes type, string company, 
+            string paidFromAccount, string paidToAccount, string currency, double amount,
+            string partyType, string party, string referenceNo) 
+            : this(new ERPObject(DocType.PaymentEntry))
+        {
+            PaymentType = type;
+            SetDate(date);
+            Company = company;
+            AccountPaidFrom = paidFromAccount;
+            AccountPaidTo = paidToAccount;
+            data.paid_from_account_currency = currency;
+            data.paid_to_account_currency = currency;
+            PaidAmount = amount;
+            ReceivedAmount = amount;
+            PartyType = partyType;
+            Party = party;
+            ReferenceNo = referenceNo;
+        }
         #endregion
 
         #region variable access
@@ -24,6 +58,15 @@ namespace ERPNext.DocTypes.Accounts
         {
             get { return data.paid_amount; }
             set { data.paid_amount = value; }
+        }
+
+        /// <summary>
+        /// Amount that was received
+        /// </summary>
+        public double ReceivedAmount
+        {
+            get { return data.received_amount; }
+            set { data.received_amount = value; }
         }
 
         /// <summary>
@@ -40,7 +83,8 @@ namespace ERPNext.DocTypes.Accounts
         /// </summary>
         public DateTime ReferenceDate
         {
-            get {
+            get
+            {
                 DateTime date = DateTime.Now;
                 try
                 {
@@ -49,7 +93,32 @@ namespace ERPNext.DocTypes.Accounts
                 catch { }
                 return date;
             }
-            set { data.reference_date = value; }
+            set { data.reference_date = value.ToString("yyyy-MM-dd"); }
+        }
+
+        public DateTime PostingDate
+        {
+            get
+            {
+                DateTime date = DateTime.Now;
+                try
+                {
+                    date = Convert.ToDateTime(data.posting_date);
+                }
+                catch { }
+                return date;
+            }
+            set { data.posting_date = value.ToString("yyyy-MM-dd"); }
+        }
+
+        /// <summary>
+        /// Simplified function to write posting and reference date at once
+        /// </summary>
+        /// <param name="date"></param>
+        public void SetDate(DateTime date)
+        {
+            PostingDate = date;
+            ReferenceDate = date;
         }
 
         /// <summary>
@@ -71,12 +140,30 @@ namespace ERPNext.DocTypes.Accounts
         }
 
         /// <summary>
+        /// Company (booking entity)
+        /// </summary>
+        public string Company
+        {
+            get { return data.company; }
+            set { data.company = value; }
+        }
+
+        /// <summary>
         /// Account element that received the payment (required)
         /// </summary>
         public string AccountPaidTo
         {
             get { return data.paid_to; }
             set { data.paid_to = value; }
+        }
+
+        /// <summary>
+        /// Account element that sent the payment
+        /// </summary>
+        public string AccountPaidFrom
+        {
+            get { return data.paid_from; }
+            set { data.paid_from = value; }
         }
 
         /// <summary>
@@ -114,17 +201,30 @@ namespace ERPNext.DocTypes.Accounts
             get
             {
                 PaymentTypes t = PaymentTypes.Receive;
-                try
+                if (data.payment_type == "Pay")
                 {
-                    t = parseEnum<PaymentTypes>(data.payment_type);
+                    t = PaymentTypes.Pay;
                 }
-                catch
+                else if (data.payment_type == "Internal Transfer")
+                {
+                    t = PaymentTypes.InternalTransfer;
+                }
+                else
                 {
                     t = PaymentTypes.Receive;
                 }
                 return t;
             }
-            set { data.payment_type = value.ToString(); }
+            set
+            {
+                switch (value)
+                {
+                    case PaymentTypes.Receive: data.payment_type = "Receive"; break;
+                    case PaymentTypes.Pay: data.payment_type = "Pay"; break;
+                    default: data.payment_type = "Internal Transfer"; break;
+                }
+                data.payment_type = value.ToString();
+            }
         }
 
         public void SetPaymentType(string type)

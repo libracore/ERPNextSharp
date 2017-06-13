@@ -48,15 +48,20 @@
     <Compile Include="Data\DocType.cs" />
     <Compile Include="Data\ERPFilter.cs" />
     <Compile Include="Data\ERPNextObjectBase.cs" />
+    <Compile Include="DocTypes\Accounts\Account.cs" />
     <Compile Include="DocTypes\Accounts\PaymentEntry.cs" />
     <Compile Include="DocTypes\Customer\Customer.cs" />
+    <Compile Include="DocTypes\Geo\Currency.cs" />
     <Compile Include="DocTypes\Item\Item.cs" />
+    <Compile Include="DocTypes\Setup\Company.cs" />
+    <Compile Include="DocTypes\Setup\PartyType.cs" />
     <Compile Include="DocTypes\Warehouse\Warehouse.cs" />
     <Compile Include="ERPNextClient.cs" />
     <Compile Include="Data\ERPObject.cs" />
     <Compile Include="Data\FetchListOption.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

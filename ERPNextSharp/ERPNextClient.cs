@@ -176,7 +176,7 @@ namespace ERPNextSharp
                         break;
                     default:
                         OnHasError(string.Format("ErrorCode: {0}\r\nDescription:\r\n{1}\r\nReason:\r\n{2}\r\n",
-                            response.StatusCode.ToString(), response.StatusDescription, response.Content));
+                            response.StatusCode.ToString(), response.StatusDescription, response.Content)); 
                         ok = false;
                         break;
                 }

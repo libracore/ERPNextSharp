@@ -42,6 +42,8 @@
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.tabLogin = new System.Windows.Forms.TabPage();
             this.tabCustomer = new System.Windows.Forms.TabPage();
+            this.txtCustomerOwner = new System.Windows.Forms.TextBox();
+            this.label10 = new System.Windows.Forms.Label();
             this.txtCustomerWebsite = new System.Windows.Forms.TextBox();
             this.label9 = new System.Windows.Forms.Label();
             this.btnDeleteCustomer = new System.Windows.Forms.Button();
@@ -58,33 +60,37 @@
             this.label5 = new System.Windows.Forms.Label();
             this.label4 = new System.Windows.Forms.Label();
             this.listCustomers = new System.Windows.Forms.ListBox();
-            this.statusStrip1 = new System.Windows.Forms.StatusStrip();
-            this.statusConnected = new System.Windows.Forms.ToolStripStatusLabel();
             this.tabTransaction = new System.Windows.Forms.TabPage();
-            this.txtCustomerOwner = new System.Windows.Forms.TextBox();
-            this.label10 = new System.Windows.Forms.Label();
-            this.listPaymentEntries = new System.Windows.Forms.ListBox();
-            this.btnGetPaymentEntries = new System.Windows.Forms.Button();
-            this.btnInsertPaymentEntry = new System.Windows.Forms.Button();
-            this.txtPaymentPartyType = new System.Windows.Forms.TextBox();
-            this.label11 = new System.Windows.Forms.Label();
-            this.label12 = new System.Windows.Forms.Label();
-            this.txtPaymentReference = new System.Windows.Forms.TextBox();
-            this.label13 = new System.Windows.Forms.Label();
-            this.label14 = new System.Windows.Forms.Label();
-            this.datePaymentDate = new System.Windows.Forms.DateTimePicker();
-            this.numPaymentAmount = new System.Windows.Forms.NumericUpDown();
-            this.label15 = new System.Windows.Forms.Label();
-            this.cmbPaymentCustomer = new System.Windows.Forms.ComboBox();
             this.cmbPaymentType = new System.Windows.Forms.ComboBox();
             this.label16 = new System.Windows.Forms.Label();
+            this.cmbPaymentCustomer = new System.Windows.Forms.ComboBox();
+            this.label15 = new System.Windows.Forms.Label();
+            this.numPaymentAmount = new System.Windows.Forms.NumericUpDown();
+            this.datePaymentDate = new System.Windows.Forms.DateTimePicker();
+            this.label14 = new System.Windows.Forms.Label();
+            this.txtPaymentReference = new System.Windows.Forms.TextBox();
+            this.label13 = new System.Windows.Forms.Label();
+            this.label12 = new System.Windows.Forms.Label();
+            this.label11 = new System.Windows.Forms.Label();
+            this.btnInsertPaymentEntry = new System.Windows.Forms.Button();
+            this.listPaymentEntries = new System.Windows.Forms.ListBox();
+            this.btnGetPaymentEntries = new System.Windows.Forms.Button();
+            this.statusStrip1 = new System.Windows.Forms.StatusStrip();
+            this.statusConnected = new System.Windows.Forms.ToolStripStatusLabel();
+            this.cmbPaymentPartyType = new System.Windows.Forms.ComboBox();
+            this.cmbPaymentFromAccount = new System.Windows.Forms.ComboBox();
+            this.label17 = new System.Windows.Forms.Label();
+            this.cmbPaymentToAccount = new System.Windows.Forms.ComboBox();
+            this.label18 = new System.Windows.Forms.Label();
+            this.cmbPaymentCompany = new System.Windows.Forms.ComboBox();
+            this.label19 = new System.Windows.Forms.Label();
             this.groupBox1.SuspendLayout();
             this.tabControl1.SuspendLayout();
             this.tabLogin.SuspendLayout();
             this.tabCustomer.SuspendLayout();
-            this.statusStrip1.SuspendLayout();
             this.tabTransaction.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.numPaymentAmount)).BeginInit();
+            this.statusStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
             // groupBox1
@@ -197,7 +203,7 @@
             this.tabControl1.Location = new System.Drawing.Point(12, 12);
             this.tabControl1.Name = "tabControl1";
             this.tabControl1.SelectedIndex = 0;
-            this.tabControl1.Size = new System.Drawing.Size(589, 294);
+            this.tabControl1.Size = new System.Drawing.Size(589, 311);
             this.tabControl1.TabIndex = 3;
             // 
             // tabLogin
@@ -239,6 +245,22 @@
             this.tabCustomer.TabIndex = 1;
             this.tabCustomer.Text = "Customer";
             this.tabCustomer.UseVisualStyleBackColor = true;
+            // 
+            // txtCustomerOwner
+            // 
+            this.txtCustomerOwner.Location = new System.Drawing.Point(292, 190);
+            this.txtCustomerOwner.Name = "txtCustomerOwner";
+            this.txtCustomerOwner.Size = new System.Drawing.Size(228, 20);
+            this.txtCustomerOwner.TabIndex = 19;
+            // 
+            // label10
+            // 
+            this.label10.AutoSize = true;
+            this.label10.Location = new System.Drawing.Point(223, 193);
+            this.label10.Name = "label10";
+            this.label10.Size = new System.Drawing.Size(38, 13);
+            this.label10.TabIndex = 18;
+            this.label10.Text = "Owner";
             // 
             // txtCustomerWebsite
             // 
@@ -375,25 +397,15 @@
             this.listCustomers.TabIndex = 3;
             this.listCustomers.DoubleClick += new System.EventHandler(this.listCustomers_DoubleClick);
             // 
-            // statusStrip1
-            // 
-            this.statusStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.statusConnected});
-            this.statusStrip1.Location = new System.Drawing.Point(0, 321);
-            this.statusStrip1.Name = "statusStrip1";
-            this.statusStrip1.Size = new System.Drawing.Size(613, 22);
-            this.statusStrip1.TabIndex = 4;
-            this.statusStrip1.Text = "statusStrip1";
-            // 
-            // statusConnected
-            // 
-            this.statusConnected.Image = global::Tests.Properties.Resources.cancel;
-            this.statusConnected.Name = "statusConnected";
-            this.statusConnected.Size = new System.Drawing.Size(102, 17);
-            this.statusConnected.Text = "Not connected";
-            // 
             // tabTransaction
             // 
+            this.tabTransaction.Controls.Add(this.cmbPaymentCompany);
+            this.tabTransaction.Controls.Add(this.label19);
+            this.tabTransaction.Controls.Add(this.cmbPaymentToAccount);
+            this.tabTransaction.Controls.Add(this.label18);
+            this.tabTransaction.Controls.Add(this.cmbPaymentFromAccount);
+            this.tabTransaction.Controls.Add(this.label17);
+            this.tabTransaction.Controls.Add(this.cmbPaymentPartyType);
             this.tabTransaction.Controls.Add(this.cmbPaymentType);
             this.tabTransaction.Controls.Add(this.label16);
             this.tabTransaction.Controls.Add(this.cmbPaymentCustomer);
@@ -404,7 +416,6 @@
             this.tabTransaction.Controls.Add(this.txtPaymentReference);
             this.tabTransaction.Controls.Add(this.label13);
             this.tabTransaction.Controls.Add(this.label12);
-            this.tabTransaction.Controls.Add(this.txtPaymentPartyType);
             this.tabTransaction.Controls.Add(this.label11);
             this.tabTransaction.Controls.Add(this.btnInsertPaymentEntry);
             this.tabTransaction.Controls.Add(this.listPaymentEntries);
@@ -412,26 +423,120 @@
             this.tabTransaction.Location = new System.Drawing.Point(4, 22);
             this.tabTransaction.Name = "tabTransaction";
             this.tabTransaction.Padding = new System.Windows.Forms.Padding(3);
-            this.tabTransaction.Size = new System.Drawing.Size(581, 268);
+            this.tabTransaction.Size = new System.Drawing.Size(581, 285);
             this.tabTransaction.TabIndex = 2;
             this.tabTransaction.Text = "Transaction";
             this.tabTransaction.UseVisualStyleBackColor = true;
             // 
-            // txtCustomerOwner
+            // cmbPaymentType
             // 
-            this.txtCustomerOwner.Location = new System.Drawing.Point(292, 190);
-            this.txtCustomerOwner.Name = "txtCustomerOwner";
-            this.txtCustomerOwner.Size = new System.Drawing.Size(228, 20);
-            this.txtCustomerOwner.TabIndex = 19;
+            this.cmbPaymentType.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cmbPaymentType.FormattingEnabled = true;
+            this.cmbPaymentType.Location = new System.Drawing.Point(292, 173);
+            this.cmbPaymentType.Name = "cmbPaymentType";
+            this.cmbPaymentType.Size = new System.Drawing.Size(228, 21);
+            this.cmbPaymentType.TabIndex = 28;
             // 
-            // label10
+            // label16
             // 
-            this.label10.AutoSize = true;
-            this.label10.Location = new System.Drawing.Point(223, 193);
-            this.label10.Name = "label10";
-            this.label10.Size = new System.Drawing.Size(38, 13);
-            this.label10.TabIndex = 18;
-            this.label10.Text = "Owner";
+            this.label16.AutoSize = true;
+            this.label16.Location = new System.Drawing.Point(223, 176);
+            this.label16.Name = "label16";
+            this.label16.Size = new System.Drawing.Size(71, 13);
+            this.label16.TabIndex = 27;
+            this.label16.Text = "Payment type";
+            // 
+            // cmbPaymentCustomer
+            // 
+            this.cmbPaymentCustomer.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cmbPaymentCustomer.FormattingEnabled = true;
+            this.cmbPaymentCustomer.Location = new System.Drawing.Point(292, 146);
+            this.cmbPaymentCustomer.Name = "cmbPaymentCustomer";
+            this.cmbPaymentCustomer.Size = new System.Drawing.Size(228, 21);
+            this.cmbPaymentCustomer.TabIndex = 26;
+            // 
+            // label15
+            // 
+            this.label15.AutoSize = true;
+            this.label15.Location = new System.Drawing.Point(223, 149);
+            this.label15.Name = "label15";
+            this.label15.Size = new System.Drawing.Size(51, 13);
+            this.label15.TabIndex = 25;
+            this.label15.Text = "Customer";
+            // 
+            // numPaymentAmount
+            // 
+            this.numPaymentAmount.DecimalPlaces = 2;
+            this.numPaymentAmount.Location = new System.Drawing.Point(292, 72);
+            this.numPaymentAmount.Maximum = new decimal(new int[] {
+            -727379968,
+            232,
+            0,
+            0});
+            this.numPaymentAmount.Name = "numPaymentAmount";
+            this.numPaymentAmount.Size = new System.Drawing.Size(228, 20);
+            this.numPaymentAmount.TabIndex = 24;
+            this.numPaymentAmount.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            // 
+            // datePaymentDate
+            // 
+            this.datePaymentDate.Location = new System.Drawing.Point(292, 120);
+            this.datePaymentDate.Name = "datePaymentDate";
+            this.datePaymentDate.Size = new System.Drawing.Size(228, 20);
+            this.datePaymentDate.TabIndex = 23;
+            // 
+            // label14
+            // 
+            this.label14.AutoSize = true;
+            this.label14.Location = new System.Drawing.Point(223, 126);
+            this.label14.Name = "label14";
+            this.label14.Size = new System.Drawing.Size(30, 13);
+            this.label14.TabIndex = 22;
+            this.label14.Text = "Date";
+            // 
+            // txtPaymentReference
+            // 
+            this.txtPaymentReference.Location = new System.Drawing.Point(292, 97);
+            this.txtPaymentReference.Name = "txtPaymentReference";
+            this.txtPaymentReference.Size = new System.Drawing.Size(228, 20);
+            this.txtPaymentReference.TabIndex = 21;
+            // 
+            // label13
+            // 
+            this.label13.AutoSize = true;
+            this.label13.Location = new System.Drawing.Point(223, 100);
+            this.label13.Name = "label13";
+            this.label13.Size = new System.Drawing.Size(57, 13);
+            this.label13.TabIndex = 20;
+            this.label13.Text = "Reference";
+            // 
+            // label12
+            // 
+            this.label12.AutoSize = true;
+            this.label12.Location = new System.Drawing.Point(223, 74);
+            this.label12.Name = "label12";
+            this.label12.Size = new System.Drawing.Size(43, 13);
+            this.label12.TabIndex = 18;
+            this.label12.Text = "Amount";
+            // 
+            // label11
+            // 
+            this.label11.AutoSize = true;
+            this.label11.Location = new System.Drawing.Point(223, 48);
+            this.label11.Name = "label11";
+            this.label11.Size = new System.Drawing.Size(54, 13);
+            this.label11.TabIndex = 16;
+            this.label11.Text = "Party type";
+            // 
+            // btnInsertPaymentEntry
+            // 
+            this.btnInsertPaymentEntry.Location = new System.Drawing.Point(142, 16);
+            this.btnInsertPaymentEntry.Name = "btnInsertPaymentEntry";
+            this.btnInsertPaymentEntry.Size = new System.Drawing.Size(120, 23);
+            this.btnInsertPaymentEntry.TabIndex = 15;
+            this.btnInsertPaymentEntry.Text = "Insert payment entry";
+            this.btnInsertPaymentEntry.UseVisualStyleBackColor = true;
+            this.btnInsertPaymentEntry.Click += new System.EventHandler(this.btnInsertPaymentEntry_Click);
             // 
             // listPaymentEntries
             // 
@@ -452,129 +557,91 @@
             this.btnGetPaymentEntries.UseVisualStyleBackColor = true;
             this.btnGetPaymentEntries.Click += new System.EventHandler(this.btnGetPaymentEntries_Click);
             // 
-            // btnInsertPaymentEntry
+            // statusStrip1
             // 
-            this.btnInsertPaymentEntry.Location = new System.Drawing.Point(142, 16);
-            this.btnInsertPaymentEntry.Name = "btnInsertPaymentEntry";
-            this.btnInsertPaymentEntry.Size = new System.Drawing.Size(120, 23);
-            this.btnInsertPaymentEntry.TabIndex = 15;
-            this.btnInsertPaymentEntry.Text = "Insert payment entry";
-            this.btnInsertPaymentEntry.UseVisualStyleBackColor = true;
-            this.btnInsertPaymentEntry.Click += new System.EventHandler(this.btnInsertPaymentEntry_Click);
+            this.statusStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.statusConnected});
+            this.statusStrip1.Location = new System.Drawing.Point(0, 338);
+            this.statusStrip1.Name = "statusStrip1";
+            this.statusStrip1.Size = new System.Drawing.Size(613, 22);
+            this.statusStrip1.TabIndex = 4;
+            this.statusStrip1.Text = "statusStrip1";
             // 
-            // txtPaymentPartyType
+            // statusConnected
             // 
-            this.txtPaymentPartyType.Location = new System.Drawing.Point(292, 45);
-            this.txtPaymentPartyType.Name = "txtPaymentPartyType";
-            this.txtPaymentPartyType.Size = new System.Drawing.Size(228, 20);
-            this.txtPaymentPartyType.TabIndex = 17;
-            this.txtPaymentPartyType.Text = "Customer";
+            this.statusConnected.Image = global::Tests.Properties.Resources.arrow_refresh;
+            this.statusConnected.Name = "statusConnected";
+            this.statusConnected.Size = new System.Drawing.Size(102, 17);
+            this.statusConnected.Text = "Not connected";
             // 
-            // label11
+            // cmbPaymentPartyType
             // 
-            this.label11.AutoSize = true;
-            this.label11.Location = new System.Drawing.Point(223, 48);
-            this.label11.Name = "label11";
-            this.label11.Size = new System.Drawing.Size(54, 13);
-            this.label11.TabIndex = 16;
-            this.label11.Text = "Party type";
+            this.cmbPaymentPartyType.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cmbPaymentPartyType.FormattingEnabled = true;
+            this.cmbPaymentPartyType.Location = new System.Drawing.Point(292, 45);
+            this.cmbPaymentPartyType.Name = "cmbPaymentPartyType";
+            this.cmbPaymentPartyType.Size = new System.Drawing.Size(228, 21);
+            this.cmbPaymentPartyType.TabIndex = 29;
             // 
-            // label12
+            // cmbPaymentFromAccount
             // 
-            this.label12.AutoSize = true;
-            this.label12.Location = new System.Drawing.Point(223, 74);
-            this.label12.Name = "label12";
-            this.label12.Size = new System.Drawing.Size(43, 13);
-            this.label12.TabIndex = 18;
-            this.label12.Text = "Amount";
+            this.cmbPaymentFromAccount.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cmbPaymentFromAccount.FormattingEnabled = true;
+            this.cmbPaymentFromAccount.Location = new System.Drawing.Point(292, 200);
+            this.cmbPaymentFromAccount.Name = "cmbPaymentFromAccount";
+            this.cmbPaymentFromAccount.Size = new System.Drawing.Size(228, 21);
+            this.cmbPaymentFromAccount.TabIndex = 31;
             // 
-            // txtPaymentReference
+            // label17
             // 
-            this.txtPaymentReference.Location = new System.Drawing.Point(292, 97);
-            this.txtPaymentReference.Name = "txtPaymentReference";
-            this.txtPaymentReference.Size = new System.Drawing.Size(228, 20);
-            this.txtPaymentReference.TabIndex = 21;
+            this.label17.AutoSize = true;
+            this.label17.Location = new System.Drawing.Point(223, 203);
+            this.label17.Name = "label17";
+            this.label17.Size = new System.Drawing.Size(51, 13);
+            this.label17.TabIndex = 30;
+            this.label17.Text = "Paid from";
             // 
-            // label13
+            // cmbPaymentToAccount
             // 
-            this.label13.AutoSize = true;
-            this.label13.Location = new System.Drawing.Point(223, 100);
-            this.label13.Name = "label13";
-            this.label13.Size = new System.Drawing.Size(57, 13);
-            this.label13.TabIndex = 20;
-            this.label13.Text = "Reference";
+            this.cmbPaymentToAccount.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cmbPaymentToAccount.FormattingEnabled = true;
+            this.cmbPaymentToAccount.Location = new System.Drawing.Point(292, 227);
+            this.cmbPaymentToAccount.Name = "cmbPaymentToAccount";
+            this.cmbPaymentToAccount.Size = new System.Drawing.Size(228, 21);
+            this.cmbPaymentToAccount.TabIndex = 33;
             // 
-            // label14
+            // label18
             // 
-            this.label14.AutoSize = true;
-            this.label14.Location = new System.Drawing.Point(223, 126);
-            this.label14.Name = "label14";
-            this.label14.Size = new System.Drawing.Size(30, 13);
-            this.label14.TabIndex = 22;
-            this.label14.Text = "Date";
+            this.label18.AutoSize = true;
+            this.label18.Location = new System.Drawing.Point(223, 230);
+            this.label18.Name = "label18";
+            this.label18.Size = new System.Drawing.Size(40, 13);
+            this.label18.TabIndex = 32;
+            this.label18.Text = "Paid to";
             // 
-            // datePaymentDate
+            // cmbPaymentCompany
             // 
-            this.datePaymentDate.Location = new System.Drawing.Point(292, 120);
-            this.datePaymentDate.Name = "datePaymentDate";
-            this.datePaymentDate.Size = new System.Drawing.Size(228, 20);
-            this.datePaymentDate.TabIndex = 23;
+            this.cmbPaymentCompany.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cmbPaymentCompany.FormattingEnabled = true;
+            this.cmbPaymentCompany.Location = new System.Drawing.Point(292, 254);
+            this.cmbPaymentCompany.Name = "cmbPaymentCompany";
+            this.cmbPaymentCompany.Size = new System.Drawing.Size(228, 21);
+            this.cmbPaymentCompany.TabIndex = 35;
             // 
-            // numPaymentAmount
+            // label19
             // 
-            this.numPaymentAmount.DecimalPlaces = 2;
-            this.numPaymentAmount.Location = new System.Drawing.Point(292, 72);
-            this.numPaymentAmount.Maximum = new decimal(new int[] {
-            -727379968,
-            232,
-            0,
-            0});
-            this.numPaymentAmount.Name = "numPaymentAmount";
-            this.numPaymentAmount.Size = new System.Drawing.Size(228, 20);
-            this.numPaymentAmount.TabIndex = 24;
-            this.numPaymentAmount.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
-            // 
-            // label15
-            // 
-            this.label15.AutoSize = true;
-            this.label15.Location = new System.Drawing.Point(223, 149);
-            this.label15.Name = "label15";
-            this.label15.Size = new System.Drawing.Size(51, 13);
-            this.label15.TabIndex = 25;
-            this.label15.Text = "Customer";
-            // 
-            // cmbPaymentCustomer
-            // 
-            this.cmbPaymentCustomer.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.cmbPaymentCustomer.FormattingEnabled = true;
-            this.cmbPaymentCustomer.Location = new System.Drawing.Point(292, 146);
-            this.cmbPaymentCustomer.Name = "cmbPaymentCustomer";
-            this.cmbPaymentCustomer.Size = new System.Drawing.Size(228, 21);
-            this.cmbPaymentCustomer.TabIndex = 26;
-            // 
-            // cmbPaymentType
-            // 
-            this.cmbPaymentType.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.cmbPaymentType.FormattingEnabled = true;
-            this.cmbPaymentType.Location = new System.Drawing.Point(292, 173);
-            this.cmbPaymentType.Name = "cmbPaymentType";
-            this.cmbPaymentType.Size = new System.Drawing.Size(228, 21);
-            this.cmbPaymentType.TabIndex = 28;
-            // 
-            // label16
-            // 
-            this.label16.AutoSize = true;
-            this.label16.Location = new System.Drawing.Point(223, 176);
-            this.label16.Name = "label16";
-            this.label16.Size = new System.Drawing.Size(71, 13);
-            this.label16.TabIndex = 27;
-            this.label16.Text = "Payment type";
+            this.label19.AutoSize = true;
+            this.label19.Location = new System.Drawing.Point(223, 257);
+            this.label19.Name = "label19";
+            this.label19.Size = new System.Drawing.Size(51, 13);
+            this.label19.TabIndex = 34;
+            this.label19.Text = "Company";
             // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(613, 343);
+            this.ClientSize = new System.Drawing.Size(613, 360);
             this.Controls.Add(this.statusStrip1);
             this.Controls.Add(this.tabControl1);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
@@ -588,11 +655,11 @@
             this.tabLogin.ResumeLayout(false);
             this.tabCustomer.ResumeLayout(false);
             this.tabCustomer.PerformLayout();
-            this.statusStrip1.ResumeLayout(false);
-            this.statusStrip1.PerformLayout();
             this.tabTransaction.ResumeLayout(false);
             this.tabTransaction.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.numPaymentAmount)).EndInit();
+            this.statusStrip1.ResumeLayout(false);
+            this.statusStrip1.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -642,13 +709,19 @@
         private System.Windows.Forms.TextBox txtPaymentReference;
         private System.Windows.Forms.Label label13;
         private System.Windows.Forms.Label label12;
-        private System.Windows.Forms.TextBox txtPaymentPartyType;
         private System.Windows.Forms.Label label11;
         private System.Windows.Forms.Button btnInsertPaymentEntry;
         private System.Windows.Forms.ComboBox cmbPaymentCustomer;
         private System.Windows.Forms.Label label15;
         private System.Windows.Forms.ComboBox cmbPaymentType;
         private System.Windows.Forms.Label label16;
+        private System.Windows.Forms.ComboBox cmbPaymentPartyType;
+        private System.Windows.Forms.ComboBox cmbPaymentToAccount;
+        private System.Windows.Forms.Label label18;
+        private System.Windows.Forms.ComboBox cmbPaymentFromAccount;
+        private System.Windows.Forms.Label label17;
+        private System.Windows.Forms.ComboBox cmbPaymentCompany;
+        private System.Windows.Forms.Label label19;
     }
 }
 

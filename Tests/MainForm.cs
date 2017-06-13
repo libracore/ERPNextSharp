@@ -20,6 +20,9 @@ namespace Tests
         #region global variables
         private ERPNextClient client;
         private Config config;
+        private List<Account> accounts;
+        private enum ConnectionState { Disconnected, Connected, Initialising };
+
         #endregion
 
         #region constructor
@@ -31,10 +34,14 @@ namespace Tests
         private void MainForm_Load(object sender, EventArgs e)
         {
             btnDisconnect.Enabled = false;
+
+            accounts = new List<Account>();
         }
 
         private void MainForm_Shown(object sender, EventArgs e)
         {
+            showConnected(ConnectionState.Disconnected);
+
             loadConfig();
 
             cmbPaymentType.Items.Clear();
@@ -83,8 +90,8 @@ namespace Tests
                 {
                     btnDisconnect.Enabled = true;
                     btnConnect.Enabled = false;
-                    showConnected(true);
                     postLoginHooks();
+                    showConnected(ConnectionState.Connected);
                 }
                 else
                 {
@@ -99,9 +106,13 @@ namespace Tests
         /// </summary>
         private void postLoginHooks()
         {
+            showConnected(ConnectionState.Initialising);
+            Application.DoEvents();
             getCustomerList();
             getPaymentEntryList();
-
+            getPaymentPartyTypesList();
+            getAccountList();
+            getCompanyList();
         }
 
         private void txtPassword_KeyDown(object sender, KeyEventArgs e)
@@ -128,17 +139,22 @@ namespace Tests
             }
         }
 
-        private void showConnected(bool isConnected)
+        private void showConnected(ConnectionState state)
         {
-            if (isConnected)
+            switch (state)
             {
-                statusConnected.Image = Properties.Resources.accept;
-                statusConnected.Text = "Connected";
-            }
-            else
-            {
-                statusConnected.Image = Properties.Resources.cancel;
-                statusConnected.Text = "Not connected";
+                case (ConnectionState.Connected):
+                    statusConnected.Image = Properties.Resources.accept;
+                    statusConnected.Text = "Connected";
+                    break;
+                case (ConnectionState.Disconnected):
+                    statusConnected.Image = Properties.Resources.cancel;
+                    statusConnected.Text = "Not connected";
+                    break;
+                default:
+                    statusConnected.Image = Properties.Resources.arrow_refresh;
+                    statusConnected.Text = "Initialising";
+                    break;
             }
         }
         private void Client_HasError(string message)
@@ -151,7 +167,7 @@ namespace Tests
             client.Dispose();
             btnDisconnect.Enabled = false;
             btnConnect.Enabled = true;
-            showConnected(false);
+            showConnected(ConnectionState.Disconnected);
         }
 
         #endregion
@@ -303,6 +319,68 @@ namespace Tests
         #endregion
 
         #region payment entries / transactions
+        private void getPaymentPartyTypesList()
+        {
+            if (client != null)
+            {
+                List<ERPObject> partyTypes = client.ListObjects(DocType.PartyType);
+
+                cmbPaymentPartyType.Items.Clear();
+                foreach (ERPObject t in partyTypes)
+                {
+                    cmbPaymentPartyType.Items.Add(t.Name);
+                }
+            }
+        }
+
+        private void getAccountList()
+        {
+            if (client != null)
+            {
+                List<ERPObject> acc = client.ListObjects(DocType.Account);
+
+                accounts.Clear();
+                cmbPaymentFromAccount.Items.Clear();
+                cmbPaymentToAccount.Items.Clear();
+                foreach (ERPObject a in acc)
+                {
+                    accounts.Add(getAccount(a.Name));
+
+                    cmbPaymentToAccount.Items.Add(a.Name);
+                    cmbPaymentFromAccount.Items.Add(a.Name);
+                }
+
+                // set defaults
+                for (int i = 0; i < accounts.Count; i++)
+                {
+                    if (accounts[i].AccountType == AccountTypes.Liability)
+                    {
+                        cmbPaymentFromAccount.SelectedIndex = i;
+                        break;
+                    }
+                }
+                for (int i = 0; i < accounts.Count; i++)
+                {
+                    if (accounts[i].AccountType == AccountTypes.Asset)
+                    {
+                        cmbPaymentFromAccount.SelectedIndex = i;
+                        break;
+                    }
+                }
+            }
+        }
+
+        private Account getAccount(string accountName)
+        {
+            Account acc = new Account();
+            if (client != null)
+            {
+                ERPObject obj = client.GetObject(DocType.Account, accountName);
+                acc = new Account(obj);
+            }
+            return acc;
+        }
+
         private void btnGetPaymentEntries_Click(object sender, EventArgs e)
         {
             getPaymentEntryList();
@@ -312,13 +390,28 @@ namespace Tests
         {
             if (client != null)
             {
-                List<ERPObject> paymnets = client.ListObjects(DocType.PaymentEntry);
+                List<ERPObject> payments = client.ListObjects(DocType.PaymentEntry);
 
                 listPaymentEntries.Items.Clear();
-                foreach (ERPObject o in paymnets)
+                foreach (ERPObject o in payments)
                 {
                     listPaymentEntries.Items.Add(o.Name);
                 }
+            }
+        }
+
+        private void getCompanyList()
+        {
+            if (client != null)
+            {
+                List<ERPObject> companies = client.ListObjects(DocType.Company);
+
+                cmbPaymentCompany.Items.Clear();
+                foreach (ERPObject c in companies)
+                {
+                    cmbPaymentCompany.Items.Add(c.Name);
+                }
+                cmbPaymentCompany.SelectedIndex = 0;
             }
         }
 
@@ -329,13 +422,23 @@ namespace Tests
 
         private PaymentEntry getPaymentFromForm()
         {
-            PaymentEntry payment = new PaymentEntry();
-            payment.PartyType = txtPaymentPartyType.Text;
-            payment.PaidAmount = Convert.ToDouble(numPaymentAmount.Value);
-            payment.ReferenceNo = txtPaymentReference.Text;
-            payment.ReferenceDate = datePaymentDate.Value;
-            payment.Party = cmbPaymentCustomer.SelectedItem.ToString();
-            payment.SetPaymentType(cmbPaymentType.SelectedItem.ToString());
+            PaymentTypes type = PaymentTypes.Receive;
+            switch (cmbPaymentType.SelectedItem.ToString())
+            {
+                case "Receive": type = PaymentTypes.Receive; break;
+                case "Pay": type = PaymentTypes.Pay; break;
+                default: type = PaymentTypes.InternalTransfer; break;
+            }
+            string paidFrom = cmbPaymentFromAccount.SelectedItem.ToString();
+            string paidTo = cmbPaymentToAccount.SelectedItem.ToString();
+            string partyType = cmbPaymentPartyType.SelectedItem.ToString();
+            string party = cmbPaymentCustomer.SelectedItem.ToString();
+
+            PaymentEntry payment = new PaymentEntry(datePaymentDate.Value,
+                type, "OmniPro", paidFrom, paidTo, "CHF", 
+                Convert.ToDouble(numPaymentAmount.Value),
+                "Customer", party, txtPaymentReference.Text);
+
             return payment;
         }
 
@@ -368,7 +471,6 @@ namespace Tests
                 ERPObject obj = client.GetObject(DocType.PaymentEntry, paymentName);
                 PaymentEntry payment = new PaymentEntry(obj);
 
-                txtPaymentPartyType.Text = payment.PartyType;
                 numPaymentAmount.Value = Convert.ToDecimal(payment.PaidAmount);
                 txtPaymentReference.Text = payment.ReferenceNo;
                 datePaymentDate.Value = payment.ReferenceDate;
@@ -378,6 +480,15 @@ namespace Tests
                     if (cmbPaymentCustomer.Items[i].ToString() == payment.Party)
                     {
                         cmbPaymentCustomer.SelectedIndex = i;
+                        break;
+                    }
+                }
+
+                for (int i = 0; i < cmbPaymentPartyType.Items.Count; i++)
+                {
+                    if (cmbPaymentPartyType.Items[i].ToString() == payment.PartyType)
+                    {
+                        cmbPaymentPartyType.SelectedIndex = i;
                         break;
                     }
                 }
