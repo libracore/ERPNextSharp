@@ -1,9 +1,9 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <xs:schema id="config"
-    targetNamespace="https://libracore.com/xml/config.xsd"
+    targetNamespace="https://libracore.com/xml/ERPNextSharp/config.xsd"
     elementFormDefault="qualified"
-    xmlns="https://libracore.com/xml/config.xsd"
-    xmlns:mstns="https://libracore.com/xml/config.xsd"
+    xmlns="https://libracore.com/xml/ERPNextSharp/config.xsd"
+    xmlns:mstns="https://libracore.com/xml/ERPNextSharp/config.xsd"
     xmlns:xs="http://www.w3.org/2001/XMLSchema"
 >
 

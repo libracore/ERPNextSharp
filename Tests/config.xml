@@ -1,7 +1,7 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
-<Configuration xmlns="https://libracore.com/xml/config.xsd"
+<Configuration xmlns="https://libracore.com/xml/ERPNextSharp/config.xsd"
           xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-          xsi:schemaLocation="https://libracore.com/xml/config.xsd config.xsd">
+          xsi:schemaLocation="https://libracore.com/xml/ERPNextSharp/config.xsd config.xsd">
   <!-- ERPNext configuration -->
   <Server>http://testerp</Server>
   

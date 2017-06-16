@@ -49,6 +49,12 @@ namespace Tests
             {
                 cmbPaymentType.Items.Add(type.ToString());
             }
+
+            cmbPaymentEntryStatus.Items.Clear();
+            foreach (string s in Functions.DocStatuses())
+            {
+                cmbPaymentEntryStatus.Items.Add(s);
+            }
         }
 
         private void loadConfig()
@@ -113,6 +119,7 @@ namespace Tests
             getPaymentPartyTypesList();
             getAccountList();
             getCompanyList();
+            getSalesInvoiceList();
         }
 
         private void txtPassword_KeyDown(object sender, KeyEventArgs e)
@@ -420,7 +427,7 @@ namespace Tests
             insertPayment();
         }
 
-        private PaymentEntry getPaymentFromForm()
+        private PaymentEntry getPaymentFromForm(PaymentEntry original)
         {
             PaymentTypes type = PaymentTypes.Receive;
             switch (cmbPaymentType.SelectedItem.ToString())
@@ -434,19 +441,34 @@ namespace Tests
             string partyType = cmbPaymentPartyType.SelectedItem.ToString();
             string party = cmbPaymentCustomer.SelectedItem.ToString();
 
-            PaymentEntry payment = new PaymentEntry(datePaymentDate.Value,
-                type, "OmniPro", paidFrom, paidTo, "CHF", 
-                Convert.ToDouble(numPaymentAmount.Value),
-                "Customer", party, txtPaymentReference.Text);
-
-            return payment;
+            if (original == null)
+            {
+                original = new PaymentEntry(datePaymentDate.Value,
+                    type, "OmniPro", paidFrom, paidTo, "CHF",
+                    Convert.ToDouble(numPaymentAmount.Value),
+                    "Customer", party, txtPaymentReference.Text);
+            }
+            else
+            {
+                original.PostingDate = datePaymentDate.Value;
+                original.ReferenceDate = datePaymentDate.Value;
+                original.PaymentType = type;
+                original.AccountPaidFrom = paidFrom;
+                original.AccountPaidTo = paidTo;
+                original.PaidAmount = Convert.ToDouble(numPaymentAmount.Value);
+                original.ReceivedAmount = Convert.ToDouble(numPaymentAmount.Value);
+                original.Party = party;
+                original.ReferenceNo = txtPaymentReference.Text;
+                original.DocStatus = Functions.DocStatusFromString(cmbPaymentEntryStatus.SelectedItem.ToString());
+            }
+            return original;
         }
 
         private void insertPayment()
         {
             if (client != null)
             {
-                PaymentEntry payment = getPaymentFromForm();
+                PaymentEntry payment = getPaymentFromForm(null);
                 ERPObject obj = payment.Object;
                 client.InsertObject(obj);
 
@@ -464,6 +486,10 @@ namespace Tests
             }
         }
 
+        /// <summary>
+        /// Opens a payment entry
+        /// </summary>
+        /// <param name="paymentName">Name of the payment entry (e.g. PE-00001)</param>
         private void getPaymentInfo(string paymentName)
         {
             if (client != null)
@@ -471,10 +497,18 @@ namespace Tests
                 ERPObject obj = client.GetObject(DocType.PaymentEntry, paymentName);
                 PaymentEntry payment = new PaymentEntry(obj);
 
+                PaymentEntryReference[] references = payment.References;
+                listPaymentEntryReferences.Items.Clear();
+                foreach (PaymentEntryReference r in references)
+                {
+                    listPaymentEntryReferences.Items.Add(r.ReferenceName);
+                }
+
                 numPaymentAmount.Value = Convert.ToDecimal(payment.PaidAmount);
                 txtPaymentReference.Text = payment.ReferenceNo;
                 datePaymentDate.Value = payment.ReferenceDate;
 
+                // Customer
                 for (int i = 0; i < cmbPaymentCustomer.Items.Count; i++)
                 {
                     if (cmbPaymentCustomer.Items[i].ToString() == payment.Party)
@@ -484,6 +518,7 @@ namespace Tests
                     }
                 }
 
+                // Party type
                 for (int i = 0; i < cmbPaymentPartyType.Items.Count; i++)
                 {
                     if (cmbPaymentPartyType.Items[i].ToString() == payment.PartyType)
@@ -493,6 +528,7 @@ namespace Tests
                     }
                 }
 
+                // Payment type
                 for (int i = 0; i < cmbPaymentType.Items.Count; i++)
                 {
                     if (cmbPaymentType.Items[i].ToString() == payment.PaymentType.ToString())
@@ -501,9 +537,114 @@ namespace Tests
                         break;
                     }
                 }
+
+                // From account
+                for (int i = 0; i < cmbPaymentFromAccount.Items.Count; i++)
+                {
+                    if (cmbPaymentFromAccount.Items[i].ToString() == payment.AccountPaidFrom.ToString())
+                    {
+                        cmbPaymentFromAccount.SelectedIndex = i;
+                        break;
+                    }
+                }
+
+                // To account
+                for (int i = 0; i < cmbPaymentToAccount.Items.Count; i++)
+                {
+                    if (cmbPaymentToAccount.Items[i].ToString() == payment.AccountPaidTo.ToString())
+                    {
+                        cmbPaymentToAccount.SelectedIndex = i;
+                        break;
+                    }
+                }
+
+                // Status
+                for (int i = 0; i < cmbPaymentEntryStatus.Items.Count; i++)
+                {
+                    if (cmbPaymentEntryStatus.Items[i].ToString() == payment.DocStatus.ToString())
+                    {
+                        cmbPaymentEntryStatus.SelectedIndex = i;
+                        break;
+                    }
+                }
             }
         }
 
+        private void btnUpdatePaymentEntry_Click(object sender, EventArgs e)
+        {
+            if (listPaymentEntries.SelectedItem != null)
+            {
+                updatePaymentEntry(listPaymentEntries.SelectedItem.ToString());
+            }
+        }
+
+        private void updatePaymentEntry(string paymentEntryName)
+        {
+            if (client != null)
+            {
+                // retrieve original entry from database (not to lose any invisible information)
+                ERPObject original = client.GetObject(DocType.PaymentEntry, paymentEntryName);
+                PaymentEntry payment = new PaymentEntry(original);
+                ERPObject updated = payment.Object;
+                client.UpdateObject(DocType.PaymentEntry, paymentEntryName, updated);
+            }
+        }
+
+
+        private void btnAddPaymentEntryReference_Click(object sender, EventArgs e)
+        {
+            if ((client != null) && (listPaymentEntries.SelectedItem != null))
+            {
+                PaymentEntryReference r = new PaymentEntryReference();
+
+                bool isOk = true;
+                if (txtPaymentEntryReference.Text.StartsWith("SO"))
+                {
+                    r.ReferenceDocType = "Sales Order";
+                }
+                else if (txtPaymentEntryReference.Text.StartsWith("SINV"))
+                {
+                    r.ReferenceDocType = "Sales Invoice";
+                }
+                else
+                {
+                    MessageBox.Show("Invalid reference ID");
+                    txtPaymentEntryReference.Focus();
+                    isOk = false;
+
+                }
+
+                if (isOk)
+                {
+                    r.Parent = listPaymentEntries.SelectedItem.ToString();
+                    r.ReferenceName = txtPaymentEntryReference.Text;
+                    r.TotalAmount = Convert.ToDouble(numPaymentAmount.Value);
+                    r.OutstandingAmount = Convert.ToDouble(numPaymentAmount.Value);
+                    r.AllocatedAmount = Convert.ToDouble(numPaymentAmount.Value);
+
+                    ERPObject obj = r.Object;
+                    client.InsertObject(obj);
+
+                    getPaymentInfo(listPaymentEntries.SelectedItem.ToString());
+                }
+            }
+        }
+        #endregion
+
+        #region sales invoices
+        private void getSalesInvoiceList()
+        {
+            if (client != null)
+            {
+                List<ERPObject> si = client.ListObjects(DocType.SalesInvoice);
+
+                listSalesInvoices.Items.Clear();
+                foreach (ERPObject a in si)
+                {
+                    listSalesInvoices.Items.Add(a.Name);
+                }
+            }
+        }
         #endregion
 
     }

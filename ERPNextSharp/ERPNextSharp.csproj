@@ -45,10 +45,14 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Data\DocRaw.cs" />
+    <Compile Include="Data\DocStatus.cs" />
     <Compile Include="Data\DocType.cs" />
     <Compile Include="Data\ERPFilter.cs" />
     <Compile Include="Data\ERPNextObjectBase.cs" />
+    <Compile Include="Data\Functions.cs" />
     <Compile Include="DocTypes\Accounts\Account.cs" />
+    <Compile Include="DocTypes\Accounts\PaymentEntryReference.cs" />
+    <Compile Include="DocTypes\Accounts\SalesInvoice.cs" />
     <Compile Include="DocTypes\Accounts\PaymentEntry.cs" />
     <Compile Include="DocTypes\Customer\Customer.cs" />
     <Compile Include="DocTypes\Geo\Currency.cs" />

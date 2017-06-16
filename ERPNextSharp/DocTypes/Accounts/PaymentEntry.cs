@@ -1,5 +1,9 @@
 ﻿using ERPNextSharp.Data;
+using RestSharp.Deserializers;
 using System;
+using System.Collections.Generic;
+using System.Dynamic;
+using System.Linq;
 
 namespace ERPNext.DocTypes.Accounts
 {
@@ -230,6 +234,29 @@ namespace ERPNext.DocTypes.Accounts
         public void SetPaymentType(string type)
         {
             data.payment_type = type;
+        }
+
+        public PaymentEntryReference[] References
+        {
+            get
+            {
+                List<PaymentEntryReference> references = new List<PaymentEntryReference>();
+                for (int i = 0; i < data.references.Count; i++)
+                {
+                    references.Add(new PaymentEntryReference(data.references[i]));
+
+                }
+                return references.ToArray();
+            }
+        }
+
+        /// <summary>
+        /// DocStatus
+        /// </summary>
+        public DocStatus DocStatus
+        {
+            get { return (DocStatus)data.docstatus; }
+            set { data.docstatus = (byte)value; }
         }
         #endregion
     }
