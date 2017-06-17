@@ -1,7 +1,7 @@
 ﻿using ERPNextSharp.Data;
 using System;
 
-namespace ERPNext.DocTypes.Accounts
+namespace ERPNextSharp.DocTypes.Accounts
 {
     /// <summary>
     /// Reference: https://frappe.github.io/erpnext/current/models/accounts/account

@@ -1,7 +1,7 @@
 ﻿using ERPNextSharp.Data;
 using System;
 
-namespace ERPNext.DocTypes.Setup
+namespace ERPNextSharp.DocTypes.Setup
 {
     /// <summary>
     /// Reference: https://frappe.github.io/erpnext/current/models/setup/party_type

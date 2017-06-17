@@ -1,7 +1,7 @@
 ﻿using ERPNextSharp.Data;
 using System;
 
-namespace ERPNext.DocTypes.Geo
+namespace ERPNextSharp.DocTypes.Geo
 {
     /// <summary>
     /// Reference: https://frappe.github.io/erpnext/current/models/geo/currency

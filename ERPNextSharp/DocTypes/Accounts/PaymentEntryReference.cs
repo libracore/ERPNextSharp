@@ -3,7 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 
-namespace ERPNext.DocTypes.Accounts
+namespace ERPNextSharp.DocTypes.Accounts
 {
     /// <summary>
     /// Reference: https://frappe.github.io/erpnext/current/models/accounts/payment_entry_reference

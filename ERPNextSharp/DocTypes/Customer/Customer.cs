@@ -1,6 +1,6 @@
 ﻿using ERPNextSharp.Data;
 
-namespace ERPNext.DocTypes.Customer
+namespace ERPNextSharp.DocTypes.Customer
 {
     /// <summary>
     /// Reference: https://frappe.github.io/erpnext/current/models/selling/customer

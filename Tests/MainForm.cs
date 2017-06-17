@@ -9,9 +9,10 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using ERPNextSharp;
 using ERPNextSharp.Data;
-using ERPNext.DocTypes.Customer;
-using ERPNext.DocTypes.Accounts;
+using ERPNextSharp.DocTypes.Customer;
+using ERPNextSharp.DocTypes.Accounts;
 using System.IO;
+using ERPNextSharp.DocTypes.Stock;
 
 namespace Tests
 {
@@ -21,6 +22,7 @@ namespace Tests
         private ERPNextClient client;
         private Config config;
         private List<Account> accounts;
+        private List<Warehouse> warehouses;
         private enum ConnectionState { Disconnected, Connected, Initialising };
 
         #endregion
@@ -36,6 +38,7 @@ namespace Tests
             btnDisconnect.Enabled = false;
 
             accounts = new List<Account>();
+            warehouses = new List<Warehouse>();
         }
 
         private void MainForm_Shown(object sender, EventArgs e)
@@ -120,6 +123,9 @@ namespace Tests
             getAccountList();
             getCompanyList();
             getSalesInvoiceList();
+            getStockEntryList();
+            getAddressList();
+            getWarehouseList();
         }
 
         private void txtPassword_KeyDown(object sender, KeyEventArgs e)
@@ -232,8 +238,8 @@ namespace Tests
         {
             if (listCustomers.SelectedItem != null)
             {
-                if (MessageBox.Show(string.Format("Really delete customer {0}?", 
-                    listCustomers.SelectedItem), "Question", MessageBoxButtons.YesNo, 
+                if (MessageBox.Show(string.Format("Really delete customer {0}?",
+                    listCustomers.SelectedItem), "Question", MessageBoxButtons.YesNo,
                     MessageBoxIcon.Question) == DialogResult.Yes)
                 {
                     deleteCustomer(listCustomers.SelectedItem.ToString());
@@ -266,7 +272,7 @@ namespace Tests
                 Customer customer = getCustomerFromForm();
                 ERPObject obj = customer.Object;
                 client.UpdateObject(DocType.Customer, customerName, obj);
-            }    
+            }
         }
 
         private Customer getCustomerFromForm()
@@ -647,5 +653,112 @@ namespace Tests
         }
         #endregion
 
+        #region stock
+        private void btnGetStockEntries_Click(object sender, EventArgs e)
+        {
+            getStockEntryList();
+        }
+
+        private void getStockEntryList()
+        {
+            if (client != null)
+            {
+                List<ERPObject> si = client.ListObjects(DocType.StockEntry);
+
+                listStockEntries.Items.Clear();
+                foreach (ERPObject a in si)
+                {
+                    listStockEntries.Items.Add(a.Name);
+                }
+            }
+        }
+
+        private void getWarehouseList()
+        {
+            if (client != null)
+            {
+                List<ERPObject> si = client.ListObjects(DocType.Warehouse);
+
+                warehouses.Clear();
+                cmbStockFromWarehouse.Items.Clear();
+                cmbStockToWarehouse.Items.Clear();
+                foreach (ERPObject a in si)
+                {
+
+                    warehouses.Add(getWarehouse(a.Name));
+                    cmbStockFromWarehouse.Items.Add(a.Name);
+                    cmbStockToWarehouse.Items.Add(a.Name);
+                }
+                cmbStockFromWarehouse.SelectedIndex = 0;
+                cmbStockToWarehouse.SelectedIndex = 0;
+            }
+        }
+
+        private Warehouse getWarehouse(string warehouseName)
+        {
+            Warehouse wh = new Warehouse();
+            if (client != null)
+            {
+                ERPObject obj = client.GetObject(DocType.Warehouse, warehouseName);
+                wh = new Warehouse(obj);
+            }
+            return wh;
+        }
+
+        private void btnAddStockEntry_Click(object sender, EventArgs e)
+        {
+            addStockEntry();
+        }
+
+        private void addStockEntry()
+        {
+            if (client != null)
+            {
+                StockEntry se = getStockEntryFromForm(null);
+                ERPObject obj = se.Object;
+                client.InsertObject(obj);
+
+                getPaymentEntryList();
+            }
+        }
+
+        private StockEntry getStockEntryFromForm(StockEntry original)
+        {
+            if (original == null)
+            {
+                original = new StockEntry();
+            }
+            else
+            {
+                original.FromWarehouse = cmbStockFromWarehouse.SelectedItem.ToString();
+                original.ToWarehouse = cmbStockToWarehouse.SelectedItem.ToString();
+
+            }
+            return original;
+        }
+
+
+        #endregion
+
+        #region addresses
+        private void btnGetAddressList_Click(object sender, EventArgs e)
+        {
+            getAddressList();
+        }
+
+        private void getAddressList()
+        {
+            if (client != null)
+            {
+                List<ERPObject> si = client.ListObjects(DocType.Address);
+
+                listAddresses.Items.Clear();
+                foreach (ERPObject a in si)
+                {
+                    listAddresses.Items.Add(a.Name);
+                }
+            }
+        }
+        #endregion
     }
 }

@@ -61,6 +61,11 @@
             this.label4 = new System.Windows.Forms.Label();
             this.listCustomers = new System.Windows.Forms.ListBox();
             this.tabTransaction = new System.Windows.Forms.TabPage();
+            this.cmbPaymentEntryStatus = new System.Windows.Forms.ComboBox();
+            this.txtPaymentEntryReference = new System.Windows.Forms.TextBox();
+            this.btnAddPaymentEntryReference = new System.Windows.Forms.Button();
+            this.btnUpdatePaymentEntry = new System.Windows.Forms.Button();
+            this.listPaymentEntryReferences = new System.Windows.Forms.ListBox();
             this.label20 = new System.Windows.Forms.Label();
             this.cmbPaymentCompany = new System.Windows.Forms.ComboBox();
             this.label19 = new System.Windows.Forms.Label();
@@ -83,24 +88,32 @@
             this.btnInsertPaymentEntry = new System.Windows.Forms.Button();
             this.listPaymentEntries = new System.Windows.Forms.ListBox();
             this.btnGetPaymentEntries = new System.Windows.Forms.Button();
-            this.statusStrip1 = new System.Windows.Forms.StatusStrip();
-            this.listPaymentEntryReferences = new System.Windows.Forms.ListBox();
             this.tabSalesInvoice = new System.Windows.Forms.TabPage();
             this.listSalesInvoices = new System.Windows.Forms.ListBox();
             this.btnGetSalesInvoices = new System.Windows.Forms.Button();
-            this.btnUpdatePaymentEntry = new System.Windows.Forms.Button();
+            this.tabStock = new System.Windows.Forms.TabPage();
+            this.btnAddStockEntry = new System.Windows.Forms.Button();
+            this.listStockEntries = new System.Windows.Forms.ListBox();
+            this.btnGetStockEntries = new System.Windows.Forms.Button();
+            this.tabAddress = new System.Windows.Forms.TabPage();
+            this.listAddresses = new System.Windows.Forms.ListBox();
+            this.btnGetAddressList = new System.Windows.Forms.Button();
+            this.statusStrip1 = new System.Windows.Forms.StatusStrip();
             this.statusConnected = new System.Windows.Forms.ToolStripStatusLabel();
-            this.btnAddPaymentEntryReference = new System.Windows.Forms.Button();
-            this.txtPaymentEntryReference = new System.Windows.Forms.TextBox();
-            this.cmbPaymentEntryStatus = new System.Windows.Forms.ComboBox();
+            this.cmbStockFromWarehouse = new System.Windows.Forms.ComboBox();
+            this.label21 = new System.Windows.Forms.Label();
+            this.cmbStockToWarehouse = new System.Windows.Forms.ComboBox();
+            this.label22 = new System.Windows.Forms.Label();
             this.groupBox1.SuspendLayout();
             this.tabControl1.SuspendLayout();
             this.tabLogin.SuspendLayout();
             this.tabCustomer.SuspendLayout();
             this.tabTransaction.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.numPaymentAmount)).BeginInit();
-            this.statusStrip1.SuspendLayout();
             this.tabSalesInvoice.SuspendLayout();
+            this.tabStock.SuspendLayout();
+            this.tabAddress.SuspendLayout();
+            this.statusStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
             // groupBox1
@@ -211,6 +224,8 @@
             this.tabControl1.Controls.Add(this.tabCustomer);
             this.tabControl1.Controls.Add(this.tabTransaction);
             this.tabControl1.Controls.Add(this.tabSalesInvoice);
+            this.tabControl1.Controls.Add(this.tabStock);
+            this.tabControl1.Controls.Add(this.tabAddress);
             this.tabControl1.Location = new System.Drawing.Point(12, 12);
             this.tabControl1.Name = "tabControl1";
             this.tabControl1.SelectedIndex = 0;
@@ -445,6 +460,54 @@
             this.tabTransaction.Text = "Transaction";
             this.tabTransaction.UseVisualStyleBackColor = true;
             // 
+            // cmbPaymentEntryStatus
+            // 
+            this.cmbPaymentEntryStatus.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cmbPaymentEntryStatus.FormattingEnabled = true;
+            this.cmbPaymentEntryStatus.Items.AddRange(new object[] {
+            "Draft",
+            "Submitted",
+            "Cancelled"});
+            this.cmbPaymentEntryStatus.Location = new System.Drawing.Point(422, 71);
+            this.cmbPaymentEntryStatus.Name = "cmbPaymentEntryStatus";
+            this.cmbPaymentEntryStatus.Size = new System.Drawing.Size(98, 21);
+            this.cmbPaymentEntryStatus.TabIndex = 39;
+            // 
+            // txtPaymentEntryReference
+            // 
+            this.txtPaymentEntryReference.Location = new System.Drawing.Point(101, 175);
+            this.txtPaymentEntryReference.Name = "txtPaymentEntryReference";
+            this.txtPaymentEntryReference.Size = new System.Drawing.Size(71, 20);
+            this.txtPaymentEntryReference.TabIndex = 38;
+            // 
+            // btnAddPaymentEntryReference
+            // 
+            this.btnAddPaymentEntryReference.Image = global::Tests.Properties.Resources.add;
+            this.btnAddPaymentEntryReference.Location = new System.Drawing.Point(178, 173);
+            this.btnAddPaymentEntryReference.Name = "btnAddPaymentEntryReference";
+            this.btnAddPaymentEntryReference.Size = new System.Drawing.Size(22, 23);
+            this.btnAddPaymentEntryReference.TabIndex = 37;
+            this.btnAddPaymentEntryReference.UseVisualStyleBackColor = true;
+            this.btnAddPaymentEntryReference.Click += new System.EventHandler(this.btnAddPaymentEntryReference_Click);
+            // 
+            // btnUpdatePaymentEntry
+            // 
+            this.btnUpdatePaymentEntry.Location = new System.Drawing.Point(268, 16);
+            this.btnUpdatePaymentEntry.Name = "btnUpdatePaymentEntry";
+            this.btnUpdatePaymentEntry.Size = new System.Drawing.Size(120, 23);
+            this.btnUpdatePaymentEntry.TabIndex = 3;
+            this.btnUpdatePaymentEntry.Text = "Update payment entry";
+            this.btnUpdatePaymentEntry.UseVisualStyleBackColor = true;
+            this.btnUpdatePaymentEntry.Click += new System.EventHandler(this.btnUpdatePaymentEntry_Click);
+            // 
+            // listPaymentEntryReferences
+            // 
+            this.listPaymentEntryReferences.FormattingEnabled = true;
+            this.listPaymentEntryReferences.Location = new System.Drawing.Point(16, 200);
+            this.listPaymentEntryReferences.Name = "listPaymentEntryReferences";
+            this.listPaymentEntryReferences.Size = new System.Drawing.Size(184, 69);
+            this.listPaymentEntryReferences.TabIndex = 29;
+            // 
             // label20
             // 
             this.label20.AutoSize = true;
@@ -646,24 +709,6 @@
             this.btnGetPaymentEntries.UseVisualStyleBackColor = true;
             this.btnGetPaymentEntries.Click += new System.EventHandler(this.btnGetPaymentEntries_Click);
             // 
-            // statusStrip1
-            // 
-            this.statusStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.statusConnected});
-            this.statusStrip1.Location = new System.Drawing.Point(0, 338);
-            this.statusStrip1.Name = "statusStrip1";
-            this.statusStrip1.Size = new System.Drawing.Size(613, 22);
-            this.statusStrip1.TabIndex = 4;
-            this.statusStrip1.Text = "statusStrip1";
-            // 
-            // listPaymentEntryReferences
-            // 
-            this.listPaymentEntryReferences.FormattingEnabled = true;
-            this.listPaymentEntryReferences.Location = new System.Drawing.Point(16, 200);
-            this.listPaymentEntryReferences.Name = "listPaymentEntryReferences";
-            this.listPaymentEntryReferences.Size = new System.Drawing.Size(184, 69);
-            this.listPaymentEntryReferences.TabIndex = 29;
-            // 
             // tabSalesInvoice
             // 
             this.tabSalesInvoice.Controls.Add(this.listSalesInvoices);
@@ -694,15 +739,90 @@
             this.btnGetSalesInvoices.Text = "Get sales invoices";
             this.btnGetSalesInvoices.UseVisualStyleBackColor = true;
             // 
-            // btnUpdatePaymentEntry
+            // tabStock
             // 
-            this.btnUpdatePaymentEntry.Location = new System.Drawing.Point(268, 16);
-            this.btnUpdatePaymentEntry.Name = "btnUpdatePaymentEntry";
-            this.btnUpdatePaymentEntry.Size = new System.Drawing.Size(120, 23);
-            this.btnUpdatePaymentEntry.TabIndex = 3;
-            this.btnUpdatePaymentEntry.Text = "Update payment entry";
-            this.btnUpdatePaymentEntry.UseVisualStyleBackColor = true;
-            this.btnUpdatePaymentEntry.Click += new System.EventHandler(this.btnUpdatePaymentEntry_Click);
+            this.tabStock.Controls.Add(this.cmbStockToWarehouse);
+            this.tabStock.Controls.Add(this.label22);
+            this.tabStock.Controls.Add(this.cmbStockFromWarehouse);
+            this.tabStock.Controls.Add(this.label21);
+            this.tabStock.Controls.Add(this.btnAddStockEntry);
+            this.tabStock.Controls.Add(this.listStockEntries);
+            this.tabStock.Controls.Add(this.btnGetStockEntries);
+            this.tabStock.Location = new System.Drawing.Point(4, 22);
+            this.tabStock.Name = "tabStock";
+            this.tabStock.Padding = new System.Windows.Forms.Padding(3);
+            this.tabStock.Size = new System.Drawing.Size(581, 285);
+            this.tabStock.TabIndex = 4;
+            this.tabStock.Text = "Stock";
+            this.tabStock.UseVisualStyleBackColor = true;
+            // 
+            // btnAddStockEntry
+            // 
+            this.btnAddStockEntry.Location = new System.Drawing.Point(132, 11);
+            this.btnAddStockEntry.Name = "btnAddStockEntry";
+            this.btnAddStockEntry.Size = new System.Drawing.Size(120, 23);
+            this.btnAddStockEntry.TabIndex = 13;
+            this.btnAddStockEntry.Text = "Add stock entry";
+            this.btnAddStockEntry.UseVisualStyleBackColor = true;
+            this.btnAddStockEntry.Click += new System.EventHandler(this.btnAddStockEntry_Click);
+            // 
+            // listStockEntries
+            // 
+            this.listStockEntries.FormattingEnabled = true;
+            this.listStockEntries.Location = new System.Drawing.Point(6, 40);
+            this.listStockEntries.Name = "listStockEntries";
+            this.listStockEntries.Size = new System.Drawing.Size(184, 121);
+            this.listStockEntries.TabIndex = 12;
+            // 
+            // btnGetStockEntries
+            // 
+            this.btnGetStockEntries.Location = new System.Drawing.Point(6, 11);
+            this.btnGetStockEntries.Name = "btnGetStockEntries";
+            this.btnGetStockEntries.Size = new System.Drawing.Size(120, 23);
+            this.btnGetStockEntries.TabIndex = 11;
+            this.btnGetStockEntries.Text = "Get stock entries";
+            this.btnGetStockEntries.UseVisualStyleBackColor = true;
+            this.btnGetStockEntries.Click += new System.EventHandler(this.btnGetStockEntries_Click);
+            // 
+            // tabAddress
+            // 
+            this.tabAddress.Controls.Add(this.listAddresses);
+            this.tabAddress.Controls.Add(this.btnGetAddressList);
+            this.tabAddress.Location = new System.Drawing.Point(4, 22);
+            this.tabAddress.Name = "tabAddress";
+            this.tabAddress.Padding = new System.Windows.Forms.Padding(3);
+            this.tabAddress.Size = new System.Drawing.Size(581, 285);
+            this.tabAddress.TabIndex = 5;
+            this.tabAddress.Text = "Address";
+            this.tabAddress.UseVisualStyleBackColor = true;
+            // 
+            // listAddresses
+            // 
+            this.listAddresses.FormattingEnabled = true;
+            this.listAddresses.Location = new System.Drawing.Point(16, 42);
+            this.listAddresses.Name = "listAddresses";
+            this.listAddresses.Size = new System.Drawing.Size(184, 121);
+            this.listAddresses.TabIndex = 14;
+            // 
+            // btnGetAddressList
+            // 
+            this.btnGetAddressList.Location = new System.Drawing.Point(16, 13);
+            this.btnGetAddressList.Name = "btnGetAddressList";
+            this.btnGetAddressList.Size = new System.Drawing.Size(120, 23);
+            this.btnGetAddressList.TabIndex = 13;
+            this.btnGetAddressList.Text = "Get addresses";
+            this.btnGetAddressList.UseVisualStyleBackColor = true;
+            this.btnGetAddressList.Click += new System.EventHandler(this.btnGetAddressList_Click);
+            // 
+            // statusStrip1
+            // 
+            this.statusStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.statusConnected});
+            this.statusStrip1.Location = new System.Drawing.Point(0, 338);
+            this.statusStrip1.Name = "statusStrip1";
+            this.statusStrip1.Size = new System.Drawing.Size(613, 22);
+            this.statusStrip1.TabIndex = 4;
+            this.statusStrip1.Text = "statusStrip1";
             // 
             // statusConnected
             // 
@@ -711,35 +831,41 @@
             this.statusConnected.Size = new System.Drawing.Size(102, 17);
             this.statusConnected.Text = "Not connected";
             // 
-            // btnAddPaymentEntryReference
+            // cmbStockFromWarehouse
             // 
-            this.btnAddPaymentEntryReference.Image = global::Tests.Properties.Resources.add;
-            this.btnAddPaymentEntryReference.Location = new System.Drawing.Point(178, 173);
-            this.btnAddPaymentEntryReference.Name = "btnAddPaymentEntryReference";
-            this.btnAddPaymentEntryReference.Size = new System.Drawing.Size(22, 23);
-            this.btnAddPaymentEntryReference.TabIndex = 37;
-            this.btnAddPaymentEntryReference.UseVisualStyleBackColor = true;
-            this.btnAddPaymentEntryReference.Click += new System.EventHandler(this.btnAddPaymentEntryReference_Click);
+            this.cmbStockFromWarehouse.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cmbStockFromWarehouse.FormattingEnabled = true;
+            this.cmbStockFromWarehouse.Location = new System.Drawing.Point(304, 40);
+            this.cmbStockFromWarehouse.Name = "cmbStockFromWarehouse";
+            this.cmbStockFromWarehouse.Size = new System.Drawing.Size(228, 21);
+            this.cmbStockFromWarehouse.TabIndex = 26;
             // 
-            // txtPaymentEntryReference
+            // label21
             // 
-            this.txtPaymentEntryReference.Location = new System.Drawing.Point(101, 175);
-            this.txtPaymentEntryReference.Name = "txtPaymentEntryReference";
-            this.txtPaymentEntryReference.Size = new System.Drawing.Size(71, 20);
-            this.txtPaymentEntryReference.TabIndex = 38;
+            this.label21.AutoSize = true;
+            this.label21.Location = new System.Drawing.Point(213, 43);
+            this.label21.Name = "label21";
+            this.label21.Size = new System.Drawing.Size(85, 13);
+            this.label21.TabIndex = 27;
+            this.label21.Text = "From warehouse";
             // 
-            // cmbPaymentEntryStatus
+            // cmbStockToWarehouse
             // 
-            this.cmbPaymentEntryStatus.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.cmbPaymentEntryStatus.FormattingEnabled = true;
-            this.cmbPaymentEntryStatus.Items.AddRange(new object[] {
-            "Draft",
-            "Submitted",
-            "Cancelled"});
-            this.cmbPaymentEntryStatus.Location = new System.Drawing.Point(422, 71);
-            this.cmbPaymentEntryStatus.Name = "cmbPaymentEntryStatus";
-            this.cmbPaymentEntryStatus.Size = new System.Drawing.Size(98, 21);
-            this.cmbPaymentEntryStatus.TabIndex = 39;
+            this.cmbStockToWarehouse.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cmbStockToWarehouse.FormattingEnabled = true;
+            this.cmbStockToWarehouse.Location = new System.Drawing.Point(304, 67);
+            this.cmbStockToWarehouse.Name = "cmbStockToWarehouse";
+            this.cmbStockToWarehouse.Size = new System.Drawing.Size(228, 21);
+            this.cmbStockToWarehouse.TabIndex = 28;
+            // 
+            // label22
+            // 
+            this.label22.AutoSize = true;
+            this.label22.Location = new System.Drawing.Point(213, 70);
+            this.label22.Name = "label22";
+            this.label22.Size = new System.Drawing.Size(75, 13);
+            this.label22.TabIndex = 29;
+            this.label22.Text = "To warehouse";
             // 
             // MainForm
             // 
@@ -762,9 +888,12 @@
             this.tabTransaction.ResumeLayout(false);
             this.tabTransaction.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.numPaymentAmount)).EndInit();
+            this.tabSalesInvoice.ResumeLayout(false);
+            this.tabStock.ResumeLayout(false);
+            this.tabStock.PerformLayout();
+            this.tabAddress.ResumeLayout(false);
             this.statusStrip1.ResumeLayout(false);
             this.statusStrip1.PerformLayout();
-            this.tabSalesInvoice.ResumeLayout(false);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -836,6 +965,17 @@
         private System.Windows.Forms.Button btnAddPaymentEntryReference;
         private System.Windows.Forms.TextBox txtPaymentEntryReference;
         private System.Windows.Forms.ComboBox cmbPaymentEntryStatus;
+        private System.Windows.Forms.TabPage tabStock;
+        private System.Windows.Forms.ListBox listStockEntries;
+        private System.Windows.Forms.Button btnGetStockEntries;
+        private System.Windows.Forms.Button btnAddStockEntry;
+        private System.Windows.Forms.TabPage tabAddress;
+        private System.Windows.Forms.ListBox listAddresses;
+        private System.Windows.Forms.Button btnGetAddressList;
+        private System.Windows.Forms.ComboBox cmbStockToWarehouse;
+        private System.Windows.Forms.Label label22;
+        private System.Windows.Forms.ComboBox cmbStockFromWarehouse;
+        private System.Windows.Forms.Label label21;
     }
 }
 

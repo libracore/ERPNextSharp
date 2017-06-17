@@ -5,7 +5,7 @@ using System.Collections.Generic;
 using System.Dynamic;
 using System.Linq;
 
-namespace ERPNext.DocTypes.Accounts
+namespace ERPNextSharp.DocTypes.Accounts
 {
     /// <summary>
     /// Reference: https://frappe.github.io/erpnext/current/models/accounts/payment_entry

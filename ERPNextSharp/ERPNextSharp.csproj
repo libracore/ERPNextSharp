@@ -55,11 +55,13 @@
     <Compile Include="DocTypes\Accounts\SalesInvoice.cs" />
     <Compile Include="DocTypes\Accounts\PaymentEntry.cs" />
     <Compile Include="DocTypes\Customer\Customer.cs" />
+    <Compile Include="DocTypes\Geo\Address.cs" />
     <Compile Include="DocTypes\Geo\Currency.cs" />
     <Compile Include="DocTypes\Item\Item.cs" />
     <Compile Include="DocTypes\Setup\Company.cs" />
     <Compile Include="DocTypes\Setup\PartyType.cs" />
-    <Compile Include="DocTypes\Warehouse\Warehouse.cs" />
+    <Compile Include="DocTypes\Stock\StockEntry.cs" />
+    <Compile Include="DocTypes\Stock\Warehouse.cs" />
     <Compile Include="ERPNextClient.cs" />
     <Compile Include="Data\ERPObject.cs" />
     <Compile Include="Data\FetchListOption.cs" />
