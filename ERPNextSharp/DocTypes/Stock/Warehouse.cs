@@ -1,5 +1,4 @@
 ﻿using ERPNextSharp.Data;
-using ERPNextSharp.DocTypes.Item;
 
 namespace ERPNextSharp.DocTypes.Stock
 {

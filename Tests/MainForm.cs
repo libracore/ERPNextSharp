@@ -23,6 +23,7 @@ namespace Tests
         private Config config;
         private List<Account> accounts;
         private List<Warehouse> warehouses;
+        private List<Item> items;
         private enum ConnectionState { Disconnected, Connected, Initialising };
 
         #endregion
@@ -39,6 +40,7 @@ namespace Tests
 
             accounts = new List<Account>();
             warehouses = new List<Warehouse>();
+            items = new List<Item>();
         }
 
         private void MainForm_Shown(object sender, EventArgs e)
@@ -126,6 +128,7 @@ namespace Tests
             getStockEntryList();
             getAddressList();
             getWarehouseList();
+            getItemsList();
         }
 
         private void txtPassword_KeyDown(object sender, KeyEventArgs e)
@@ -728,16 +731,51 @@ namespace Tests
             {
                 original = new StockEntry();
             }
-            else
-            {
-                original.FromWarehouse = cmbStockFromWarehouse.SelectedItem.ToString();
-                original.ToWarehouse = cmbStockToWarehouse.SelectedItem.ToString();
 
-            }
+            original.FromWarehouse = cmbStockFromWarehouse.SelectedItem.ToString();
+            original.ToWarehouse = cmbStockToWarehouse.SelectedItem.ToString();
+
+            // add an item
+            List<StockEntryDetail> entryItems = new List<StockEntryDetail>();
+            StockEntryDetail sed = new StockEntryDetail();
+            sed.ItemCode = cmbStockEntryItems.SelectedItem.ToString();
+            sed.Quantity = Convert.ToDouble(numItemsQty.Value);
+            entryItems.Add(sed);
+            original.Items = entryItems.ToArray();
+
+            original.Purpose = Purposes.Manufacture;
+
             return original;
         }
 
+        private void getItemsList()
+        {
+            if (client != null)
+            {
+                List<ERPObject> i = client.ListObjects(DocType.Item);
 
+                items.Clear();
+                cmbStockEntryItems.Items.Clear();
+                foreach (ERPObject item in i)
+                {
+
+                    items.Add(getItem(item.Name));
+                    cmbStockEntryItems.Items.Add(item.Name);
+                }
+                cmbStockEntryItems.SelectedIndex = 0;
+            }
+        }
+
+        private Item getItem(string itemName)
+        {
+            Item item = new Item();
+            if (client != null)
+            {
+                ERPObject obj = client.GetObject(DocType.Item, itemName);
+                item = new Item(obj);
+            }
+            return item;
+        }
         #endregion
 
         #region addresses

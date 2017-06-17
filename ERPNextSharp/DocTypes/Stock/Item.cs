@@ -1,6 +1,6 @@
 ﻿using ERPNextSharp.Data;
 
-namespace ERPNextSharp.DocTypes.Item
+namespace ERPNextSharp.DocTypes.Stock
 {
     /// <summary>
     /// Reference: https://frappe.github.io/erpnext/current/models/stock/item
@@ -18,7 +18,7 @@ namespace ERPNextSharp.DocTypes.Item
         #endregion
 
         #region variable access
-        public string Code
+        public string ItemCode
         {
             get { return data.item_code; }
             set { data.item_code = value; }
@@ -30,7 +30,7 @@ namespace ERPNextSharp.DocTypes.Item
             set { data.item_name = value; }
         }
 
-        public string Group
+        public string ItemGroup
         {
             get { return data.item_group; }
             set { data.item_group = value; }

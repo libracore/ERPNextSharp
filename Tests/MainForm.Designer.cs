@@ -92,6 +92,10 @@
             this.listSalesInvoices = new System.Windows.Forms.ListBox();
             this.btnGetSalesInvoices = new System.Windows.Forms.Button();
             this.tabStock = new System.Windows.Forms.TabPage();
+            this.cmbStockToWarehouse = new System.Windows.Forms.ComboBox();
+            this.label22 = new System.Windows.Forms.Label();
+            this.cmbStockFromWarehouse = new System.Windows.Forms.ComboBox();
+            this.label21 = new System.Windows.Forms.Label();
             this.btnAddStockEntry = new System.Windows.Forms.Button();
             this.listStockEntries = new System.Windows.Forms.ListBox();
             this.btnGetStockEntries = new System.Windows.Forms.Button();
@@ -100,10 +104,9 @@
             this.btnGetAddressList = new System.Windows.Forms.Button();
             this.statusStrip1 = new System.Windows.Forms.StatusStrip();
             this.statusConnected = new System.Windows.Forms.ToolStripStatusLabel();
-            this.cmbStockFromWarehouse = new System.Windows.Forms.ComboBox();
-            this.label21 = new System.Windows.Forms.Label();
-            this.cmbStockToWarehouse = new System.Windows.Forms.ComboBox();
-            this.label22 = new System.Windows.Forms.Label();
+            this.cmbStockEntryItems = new System.Windows.Forms.ComboBox();
+            this.label23 = new System.Windows.Forms.Label();
+            this.numItemsQty = new System.Windows.Forms.NumericUpDown();
             this.groupBox1.SuspendLayout();
             this.tabControl1.SuspendLayout();
             this.tabLogin.SuspendLayout();
@@ -114,6 +117,7 @@
             this.tabStock.SuspendLayout();
             this.tabAddress.SuspendLayout();
             this.statusStrip1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.numItemsQty)).BeginInit();
             this.SuspendLayout();
             // 
             // groupBox1
@@ -741,6 +745,9 @@
             // 
             // tabStock
             // 
+            this.tabStock.Controls.Add(this.numItemsQty);
+            this.tabStock.Controls.Add(this.cmbStockEntryItems);
+            this.tabStock.Controls.Add(this.label23);
             this.tabStock.Controls.Add(this.cmbStockToWarehouse);
             this.tabStock.Controls.Add(this.label22);
             this.tabStock.Controls.Add(this.cmbStockFromWarehouse);
@@ -755,6 +762,42 @@
             this.tabStock.TabIndex = 4;
             this.tabStock.Text = "Stock";
             this.tabStock.UseVisualStyleBackColor = true;
+            // 
+            // cmbStockToWarehouse
+            // 
+            this.cmbStockToWarehouse.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cmbStockToWarehouse.FormattingEnabled = true;
+            this.cmbStockToWarehouse.Location = new System.Drawing.Point(304, 67);
+            this.cmbStockToWarehouse.Name = "cmbStockToWarehouse";
+            this.cmbStockToWarehouse.Size = new System.Drawing.Size(228, 21);
+            this.cmbStockToWarehouse.TabIndex = 28;
+            // 
+            // label22
+            // 
+            this.label22.AutoSize = true;
+            this.label22.Location = new System.Drawing.Point(213, 70);
+            this.label22.Name = "label22";
+            this.label22.Size = new System.Drawing.Size(75, 13);
+            this.label22.TabIndex = 29;
+            this.label22.Text = "To warehouse";
+            // 
+            // cmbStockFromWarehouse
+            // 
+            this.cmbStockFromWarehouse.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cmbStockFromWarehouse.FormattingEnabled = true;
+            this.cmbStockFromWarehouse.Location = new System.Drawing.Point(304, 40);
+            this.cmbStockFromWarehouse.Name = "cmbStockFromWarehouse";
+            this.cmbStockFromWarehouse.Size = new System.Drawing.Size(228, 21);
+            this.cmbStockFromWarehouse.TabIndex = 26;
+            // 
+            // label21
+            // 
+            this.label21.AutoSize = true;
+            this.label21.Location = new System.Drawing.Point(213, 43);
+            this.label21.Name = "label21";
+            this.label21.Size = new System.Drawing.Size(85, 13);
+            this.label21.TabIndex = 27;
+            this.label21.Text = "From warehouse";
             // 
             // btnAddStockEntry
             // 
@@ -831,41 +874,42 @@
             this.statusConnected.Size = new System.Drawing.Size(102, 17);
             this.statusConnected.Text = "Not connected";
             // 
-            // cmbStockFromWarehouse
+            // cmbStockEntryItems
             // 
-            this.cmbStockFromWarehouse.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.cmbStockFromWarehouse.FormattingEnabled = true;
-            this.cmbStockFromWarehouse.Location = new System.Drawing.Point(304, 40);
-            this.cmbStockFromWarehouse.Name = "cmbStockFromWarehouse";
-            this.cmbStockFromWarehouse.Size = new System.Drawing.Size(228, 21);
-            this.cmbStockFromWarehouse.TabIndex = 26;
+            this.cmbStockEntryItems.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cmbStockEntryItems.FormattingEnabled = true;
+            this.cmbStockEntryItems.Location = new System.Drawing.Point(367, 94);
+            this.cmbStockEntryItems.Name = "cmbStockEntryItems";
+            this.cmbStockEntryItems.Size = new System.Drawing.Size(165, 21);
+            this.cmbStockEntryItems.TabIndex = 30;
             // 
-            // label21
+            // label23
             // 
-            this.label21.AutoSize = true;
-            this.label21.Location = new System.Drawing.Point(213, 43);
-            this.label21.Name = "label21";
-            this.label21.Size = new System.Drawing.Size(85, 13);
-            this.label21.TabIndex = 27;
-            this.label21.Text = "From warehouse";
+            this.label23.AutoSize = true;
+            this.label23.Location = new System.Drawing.Point(213, 97);
+            this.label23.Name = "label23";
+            this.label23.Size = new System.Drawing.Size(27, 13);
+            this.label23.TabIndex = 31;
+            this.label23.Text = "Item";
             // 
-            // cmbStockToWarehouse
+            // numItemsQty
             // 
-            this.cmbStockToWarehouse.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.cmbStockToWarehouse.FormattingEnabled = true;
-            this.cmbStockToWarehouse.Location = new System.Drawing.Point(304, 67);
-            this.cmbStockToWarehouse.Name = "cmbStockToWarehouse";
-            this.cmbStockToWarehouse.Size = new System.Drawing.Size(228, 21);
-            this.cmbStockToWarehouse.TabIndex = 28;
-            // 
-            // label22
-            // 
-            this.label22.AutoSize = true;
-            this.label22.Location = new System.Drawing.Point(213, 70);
-            this.label22.Name = "label22";
-            this.label22.Size = new System.Drawing.Size(75, 13);
-            this.label22.TabIndex = 29;
-            this.label22.Text = "To warehouse";
+            this.numItemsQty.DecimalPlaces = 1;
+            this.numItemsQty.Location = new System.Drawing.Point(304, 95);
+            this.numItemsQty.Maximum = new decimal(new int[] {
+            -727379968,
+            232,
+            0,
+            0});
+            this.numItemsQty.Name = "numItemsQty";
+            this.numItemsQty.Size = new System.Drawing.Size(57, 20);
+            this.numItemsQty.TabIndex = 32;
+            this.numItemsQty.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            this.numItemsQty.Value = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
             // 
             // MainForm
             // 
@@ -894,6 +938,7 @@
             this.tabAddress.ResumeLayout(false);
             this.statusStrip1.ResumeLayout(false);
             this.statusStrip1.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.numItemsQty)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -976,6 +1021,9 @@
         private System.Windows.Forms.Label label22;
         private System.Windows.Forms.ComboBox cmbStockFromWarehouse;
         private System.Windows.Forms.Label label21;
+        private System.Windows.Forms.ComboBox cmbStockEntryItems;
+        private System.Windows.Forms.Label label23;
+        private System.Windows.Forms.NumericUpDown numItemsQty;
     }
 }
 

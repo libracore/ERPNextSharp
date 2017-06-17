@@ -57,9 +57,10 @@
     <Compile Include="DocTypes\Customer\Customer.cs" />
     <Compile Include="DocTypes\Geo\Address.cs" />
     <Compile Include="DocTypes\Geo\Currency.cs" />
-    <Compile Include="DocTypes\Item\Item.cs" />
+    <Compile Include="DocTypes\Stock\Item.cs" />
     <Compile Include="DocTypes\Setup\Company.cs" />
     <Compile Include="DocTypes\Setup\PartyType.cs" />
+    <Compile Include="DocTypes\Stock\StockEntryDetail.cs" />
     <Compile Include="DocTypes\Stock\StockEntry.cs" />
     <Compile Include="DocTypes\Stock\Warehouse.cs" />
     <Compile Include="ERPNextClient.cs" />
