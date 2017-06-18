@@ -423,11 +423,14 @@ namespace Tests
                 List<ERPObject> companies = client.ListObjects(DocType.Company);
 
                 cmbPaymentCompany.Items.Clear();
+                cmbStockEntryCompany.Items.Clear();
                 foreach (ERPObject c in companies)
                 {
                     cmbPaymentCompany.Items.Add(c.Name);
+                    cmbStockEntryCompany.Items.Add(c.Name);
                 }
                 cmbPaymentCompany.SelectedIndex = 0;
+                cmbStockEntryCompany.SelectedIndex = 0;
             }
         }
 
@@ -593,7 +596,7 @@ namespace Tests
             {
                 // retrieve original entry from database (not to lose any invisible information)
                 ERPObject original = client.GetObject(DocType.PaymentEntry, paymentEntryName);
-                PaymentEntry payment = new PaymentEntry(original);
+                PaymentEntry payment = getPaymentFromForm(new PaymentEntry(original));
                 ERPObject updated = payment.Object;
                 client.UpdateObject(DocType.PaymentEntry, paymentEntryName, updated);
             }
@@ -744,6 +747,7 @@ namespace Tests
             original.Items = entryItems.ToArray();
 
             original.Purpose = Purposes.Manufacture;
+            original.Company = cmbStockEntryCompany.SelectedItem.ToString();
 
             return original;
         }

@@ -40,6 +40,15 @@ namespace ERPNextSharp.DocTypes.Stock
         }
 
         /// <summary>
+        /// Company
+        /// </summary>
+        public string Company
+        {
+            get { return data.company; }
+            set { data.company = value; }
+        }
+
+        /// <summary>
         /// Items sub-table
         /// </summary>
         public StockEntryDetail[] Items

@@ -298,9 +298,13 @@ namespace ERPNextSharp
 
             var response = this.client.Execute(request);
 
-            assertResponseIsOK(response);
+            ERPObject output = obj;
+            if (assertResponseIsOK(response))
+            {
+                output = parseOneObject(obj.ObjectType, response);
+            }
 
-            return parseOneObject(obj.ObjectType, response);
+            return obj;
         }
 
         public ERPObject GetObject(DocType docType, string name)
@@ -316,9 +320,13 @@ namespace ERPNextSharp
                 return null;
             }
 
-            assertResponseIsOK(response);
+            ERPObject output = new ERPObject(docType);
+            if (assertResponseIsOK(response))
+            {
+                output = parseOneObject(docType, response);
+            }
 
-            return parseOneObject(docType, response);
+            return output;
         }
 
         public ERPObject UpdateObject(ERPObject obj)
@@ -336,9 +344,13 @@ namespace ERPNextSharp
 
             var response = this.client.Execute(request);
 
-            assertResponseIsOK(response);
+            ERPObject output = obj;
+            if (assertResponseIsOK(response))
+            { 
+                output = parseOneObject(docType, response);
+            }
 
-            return parseOneObject(docType, response);
+            return output;
         }
 
         public void DeleteObject(DocType docType, string name)
@@ -384,9 +396,13 @@ namespace ERPNextSharp
             }
 
             var response = this.client.Execute(request);
-            assertResponseIsOK(response);
+            List<ERPObject> objects = new List<ERPObject>();
+            if (assertResponseIsOK(response))
+            {
+                objects = parseManyObjects(docType, response);
+            }
 
-            return parseManyObjects(docType, response);
+            return objects;
         }
         #endregion
 
