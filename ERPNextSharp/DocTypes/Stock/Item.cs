@@ -47,6 +47,50 @@ namespace ERPNextSharp.DocTypes.Stock
             get { return data.last_purchase_rate; }
             set { data.last_purchase_rate = value; }
         }
+
+        public string VariantOf
+        {
+            get { return data.variant_of; }
+            set { data.variant_of = value; }
+        }
+
+        public string Barcode
+        {
+            get { return data.barcode; }
+            set { data.barcode = value; }
+        }
+
+        public string UnitOfMeasure
+        {
+            get { return data.stock_uom; }
+            set { data.stock_uom = value; }
+        }
+
+        public string Description
+        {
+            get { return data.description; }
+            set { data.description = value; }
+        }
+
+        public string DefaultWarehouse
+        {
+            get { return data.default_warehouse; }
+            set { data.default_warehouse = value; }
+        }
+
+        public string DefaultSupplier
+        {
+            get { return data.default_supplier; }
+            set { data.default_supplier = value; }
+        }
+
+        #region iGLOi specific variables
+        public string CustomerItemName
+        {
+            get { return data.customer_item_name; }
+            set { data.customer_item_name = value; }
+        }
+        #endregion
         #endregion
     }
 }

@@ -57,6 +57,9 @@
     <Compile Include="DocTypes\Customer\Customer.cs" />
     <Compile Include="DocTypes\Geo\Address.cs" />
     <Compile Include="DocTypes\Geo\Currency.cs" />
+    <Compile Include="DocTypes\Stock\PricingRule.cs" />
+    <Compile Include="DocTypes\Stock\ItemPrice.cs" />
+    <Compile Include="DocTypes\Stock\PriceList.cs" />
     <Compile Include="DocTypes\Stock\Item.cs" />
     <Compile Include="DocTypes\Setup\Company.cs" />
     <Compile Include="DocTypes\Setup\PartyType.cs" />
