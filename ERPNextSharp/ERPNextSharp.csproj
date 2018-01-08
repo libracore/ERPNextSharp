@@ -57,6 +57,8 @@
     <Compile Include="DocTypes\Customer\Customer.cs" />
     <Compile Include="DocTypes\Geo\Address.cs" />
     <Compile Include="DocTypes\Geo\Currency.cs" />
+    <Compile Include="DocTypes\Project\TimesheetDetail.cs" />
+    <Compile Include="DocTypes\Project\Timesheet.cs" />
     <Compile Include="DocTypes\Stock\PricingRule.cs" />
     <Compile Include="DocTypes\Stock\ItemPrice.cs" />
     <Compile Include="DocTypes\Stock\PriceList.cs" />

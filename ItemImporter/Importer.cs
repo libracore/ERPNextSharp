@@ -651,5 +651,9 @@ namespace ItemImporter
         }
         #endregion
 
+        private void listItems_SelectedIndexChanged(object sender, EventArgs e)
+        {
+
+        }
     }
 }
