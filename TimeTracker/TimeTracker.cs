@@ -358,7 +358,7 @@ namespace TimeTracker
             timesheetdetail.activity_type = cbActivity_Type.Text;
             if (txtHours.Text != "")
             {
-                timesheetdetail.hours = Convert.ToInt32(txtHours.Text);
+                timesheetdetail.hours = Convert.ToDouble(txtHours.Text);
             }
             else
             {
