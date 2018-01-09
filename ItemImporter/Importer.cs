@@ -351,6 +351,26 @@ namespace ItemImporter
                         {
                             item.CustomerItemName = dataGridView1[y, i].Value.ToString();
                         }
+                        if (dataGridView1.Columns[y].HeaderText == "Default_material_request_type")
+                        {
+                            item.DefaultMaterialRequestType = dataGridView1[y, i].Value.ToString();
+                        }
+                        if (dataGridView1.Columns[y].HeaderText == "has_batch_no")
+                        {
+                            item.has_batch_no = dataGridView1[y, i].Value.ToString();
+                        }
+                        if (dataGridView1.Columns[y].HeaderText == "create_new_batch")
+                        {
+                            item.create_new_batch = dataGridView1[y, i].Value.ToString();
+                        }
+                        if (dataGridView1.Columns[y].HeaderText == "has_expiry_date")
+                        {
+                            item.has_expiry_date = dataGridView1[y, i].Value.ToString();
+                        }
+                        if (dataGridView1.Columns[y].HeaderText == "publish_in_hub")
+                        {
+                            item.publish_in_hub = dataGridView1[y, i].Value.ToString();
+                        }
                     }
 
                     ERPObject obj = item.Object;

@@ -84,6 +84,36 @@ namespace ERPNextSharp.DocTypes.Stock
             set { data.default_supplier = value; }
         }
 
+        public string DefaultMaterialRequestType
+        {
+            get { return data.default_material_request_type; }
+            set { data.default_material_request_type = value; }
+        }
+
+        public string has_batch_no
+        {
+            get { return data.has_batch_no; }
+            set { data.has_batch_no = value; }
+        }
+
+        public string create_new_batch
+        {
+            get { return data.create_new_batch; }
+            set { data.create_new_batch = value; }
+        }
+
+        public string has_expiry_date
+        {
+            get { return data.has_expiry_date; }
+            set { data.has_expiry_date = value; }
+        }
+
+        public string publish_in_hub
+        {
+            get { return data.publish_in_hub; }
+            set { data.publish_in_hub = value; }
+        }
+
         #region iGLOi specific variables
         public string CustomerItemName
         {

@@ -1,4 +1,5 @@
 ﻿using ERPNextSharp.Data;
+using System.Collections.Generic;
 
 namespace ERPNextSharp.DocTypes.Stock
 {
@@ -57,6 +58,33 @@ namespace ERPNextSharp.DocTypes.Stock
         {
             get { return data.note; }
             set { data.note = value; }
+        }
+        public int docstatus
+        {
+            get { return data.docstatus; }
+            set { data.docstatus = value; }
+        }
+
+        public TimesheetDetail[] time_logs
+        {
+            get
+            {
+                List<TimesheetDetail> time_logs = new List<TimesheetDetail>();
+                for (int i = 0; i < data.items.Count; i++)
+                {
+                    time_logs.Add(new TimesheetDetail(data.time_logs[i]));
+
+                }
+                return time_logs.ToArray();
+            }
+            set
+            {
+                data.time_logs = new IDictionary<string, object>[value.Length];
+                for (int i = 0; i < value.Length; i++)
+                {
+                    data.time_logs[i] = value[i].GetDictionary();
+                }
+            }
         }
         #endregion
     }
