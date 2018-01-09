@@ -376,6 +376,8 @@ namespace TimeTracker
 
             ERPObject obj = timesheet.Object;
             client.InsertObject(obj);
+
+            MessageBox.Show("Saved as Draft!", "Well done", MessageBoxButtons.OK, MessageBoxIcon.Information);
         }
         private void SaveAsSubmitted()
         {
@@ -386,7 +388,7 @@ namespace TimeTracker
             timesheetdetail.activity_type = cbActivity_Type.Text;
             if (txtHours.Text != "")
             {
-                timesheetdetail.hours = Convert.ToInt32(txtHours.Text);
+                timesheetdetail.hours = Convert.ToDouble(txtHours.Text);
             }
             else
             {
@@ -405,6 +407,8 @@ namespace TimeTracker
 
             ERPObject obj = timesheet.Object;
             client.InsertObject(obj);
+
+            MessageBox.Show("Saved and Submitted!", "Well done", MessageBoxButtons.OK, MessageBoxIcon.Information);
         }
 
         private void btnNow_Click(object sender, EventArgs e)
