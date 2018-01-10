@@ -42,10 +42,15 @@ namespace ERPNextSharp.DocTypes.Stock
                 value.Year, value.Month, value.Day, 
                 value.Hour, value.Minute, value.Second); }
         }
-        public string to_time
+        public DateTime to_time
         {
-            get { return data.to_time; }
-            set { data.to_time = value; }
+            get { return Convert.ToDateTime(data.to_time); }
+            set
+            {
+                data.to_time = string.Format("{0:D4}-{1:D2}-{2:D2} {3:D2}:{4:D2}:{5:D2}",
+              value.Year, value.Month, value.Day,
+              value.Hour, value.Minute, value.Second);
+            }
         }
         public double hours
         {

@@ -99,6 +99,9 @@
             this.cbActivity_Type = new System.Windows.Forms.ComboBox();
             this.label21 = new System.Windows.Forms.Label();
             this.cbCompany = new System.Windows.Forms.ComboBox();
+            this.dtToTime = new System.Windows.Forms.DateTimePicker();
+            this.label25 = new System.Windows.Forms.Label();
+            this.button1 = new System.Windows.Forms.Button();
             this.groupBox1.SuspendLayout();
             this.statusStrip1.SuspendLayout();
             this.tabControl1.SuspendLayout();
@@ -279,7 +282,7 @@
             // 
             // btnAdd
             // 
-            this.btnAdd.Location = new System.Drawing.Point(564, 425);
+            this.btnAdd.Location = new System.Drawing.Point(415, 424);
             this.btnAdd.Name = "btnAdd";
             this.btnAdd.Size = new System.Drawing.Size(153, 59);
             this.btnAdd.TabIndex = 51;
@@ -305,6 +308,7 @@
             this.cbProject1.Name = "cbProject1";
             this.cbProject1.Size = new System.Drawing.Size(121, 21);
             this.cbProject1.TabIndex = 49;
+            this.cbProject1.SelectedValueChanged += new System.EventHandler(this.cbProject1_SelectedValueChanged);
             // 
             // cbActivityType1
             // 
@@ -349,9 +353,9 @@
             // btnSave
             // 
             this.btnSave.Enabled = false;
-            this.btnSave.Location = new System.Drawing.Point(519, 54);
+            this.btnSave.Location = new System.Drawing.Point(586, 94);
             this.btnSave.Name = "btnSave";
-            this.btnSave.Size = new System.Drawing.Size(215, 37);
+            this.btnSave.Size = new System.Drawing.Size(107, 37);
             this.btnSave.TabIndex = 44;
             this.btnSave.Text = "Save";
             this.btnSave.UseVisualStyleBackColor = true;
@@ -359,7 +363,7 @@
             // 
             // btnAddTimeLog
             // 
-            this.btnAddTimeLog.Location = new System.Drawing.Point(627, 14);
+            this.btnAddTimeLog.Location = new System.Drawing.Point(586, 54);
             this.btnAddTimeLog.Name = "btnAddTimeLog";
             this.btnAddTimeLog.Size = new System.Drawing.Size(107, 37);
             this.btnAddTimeLog.TabIndex = 43;
@@ -369,7 +373,7 @@
             // 
             // btnEdit
             // 
-            this.btnEdit.Location = new System.Drawing.Point(519, 14);
+            this.btnEdit.Location = new System.Drawing.Point(586, 14);
             this.btnEdit.Name = "btnEdit";
             this.btnEdit.Size = new System.Drawing.Size(107, 37);
             this.btnEdit.TabIndex = 42;
@@ -397,11 +401,14 @@
             // 
             // dtEnd_Detail
             // 
+            this.dtEnd_Detail.CustomFormat = "dd.MM.yyyy HH:mm:ss";
             this.dtEnd_Detail.Enabled = false;
+            this.dtEnd_Detail.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
             this.dtEnd_Detail.Location = new System.Drawing.Point(266, 464);
             this.dtEnd_Detail.Name = "dtEnd_Detail";
-            this.dtEnd_Detail.Size = new System.Drawing.Size(292, 20);
+            this.dtEnd_Detail.Size = new System.Drawing.Size(143, 20);
             this.dtEnd_Detail.TabIndex = 37;
+            this.dtEnd_Detail.ValueChanged += new System.EventHandler(this.dtEnd_Detail_ValueChanged);
             // 
             // label18
             // 
@@ -414,11 +421,14 @@
             // 
             // dtStart_Detail
             // 
+            this.dtStart_Detail.CustomFormat = "dd.MM.yyyy HH:mm:ss";
             this.dtStart_Detail.Enabled = false;
+            this.dtStart_Detail.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
             this.dtStart_Detail.Location = new System.Drawing.Point(266, 425);
             this.dtStart_Detail.Name = "dtStart_Detail";
-            this.dtStart_Detail.Size = new System.Drawing.Size(292, 20);
+            this.dtStart_Detail.Size = new System.Drawing.Size(143, 20);
             this.dtStart_Detail.TabIndex = 35;
+            this.dtStart_Detail.ValueChanged += new System.EventHandler(this.dtStart_Detail_ValueChanged);
             // 
             // label17
             // 
@@ -470,7 +480,7 @@
             this.txtNote.Location = new System.Drawing.Point(266, 245);
             this.txtNote.Multiline = true;
             this.txtNote.Name = "txtNote";
-            this.txtNote.Size = new System.Drawing.Size(451, 136);
+            this.txtNote.Size = new System.Drawing.Size(468, 136);
             this.txtNote.TabIndex = 28;
             // 
             // label13
@@ -485,15 +495,15 @@
             // txtTotal
             // 
             this.txtTotal.Enabled = false;
-            this.txtTotal.Location = new System.Drawing.Point(568, 169);
+            this.txtTotal.Location = new System.Drawing.Point(419, 170);
             this.txtTotal.Name = "txtTotal";
-            this.txtTotal.Size = new System.Drawing.Size(149, 20);
+            this.txtTotal.Size = new System.Drawing.Size(94, 20);
             this.txtTotal.TabIndex = 26;
             // 
             // label12
             // 
             this.label12.AutoSize = true;
-            this.label12.Location = new System.Drawing.Point(564, 146);
+            this.label12.Location = new System.Drawing.Point(415, 147);
             this.label12.Name = "label12";
             this.label12.Size = new System.Drawing.Size(105, 13);
             this.label12.TabIndex = 25;
@@ -501,18 +511,22 @@
             // 
             // dtEndDate
             // 
+            this.dtEndDate.CustomFormat = "dd.MM.yyyy HH:mm:ss";
             this.dtEndDate.Enabled = false;
+            this.dtEndDate.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
             this.dtEndDate.Location = new System.Drawing.Point(266, 193);
             this.dtEndDate.Name = "dtEndDate";
-            this.dtEndDate.Size = new System.Drawing.Size(292, 20);
+            this.dtEndDate.Size = new System.Drawing.Size(143, 20);
             this.dtEndDate.TabIndex = 24;
             // 
             // dtStartDate
             // 
+            this.dtStartDate.CustomFormat = "dd.MM.yyyy HH:mm:ss";
             this.dtStartDate.Enabled = false;
+            this.dtStartDate.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
             this.dtStartDate.Location = new System.Drawing.Point(266, 141);
             this.dtStartDate.Name = "dtStartDate";
-            this.dtStartDate.Size = new System.Drawing.Size(292, 20);
+            this.dtStartDate.Size = new System.Drawing.Size(143, 20);
             this.dtStartDate.TabIndex = 23;
             // 
             // label11
@@ -615,6 +629,9 @@
             // 
             // tabPage2
             // 
+            this.tabPage2.Controls.Add(this.button1);
+            this.tabPage2.Controls.Add(this.dtToTime);
+            this.tabPage2.Controls.Add(this.label25);
             this.tabPage2.Controls.Add(this.btnNow);
             this.tabPage2.Controls.Add(this.cbTask);
             this.tabPage2.Controls.Add(this.label30);
@@ -655,7 +672,7 @@
             // cbTask
             // 
             this.cbTask.FormattingEnabled = true;
-            this.cbTask.Location = new System.Drawing.Point(200, 117);
+            this.cbTask.Location = new System.Drawing.Point(394, 121);
             this.cbTask.Name = "cbTask";
             this.cbTask.Size = new System.Drawing.Size(184, 21);
             this.cbTask.Sorted = true;
@@ -664,7 +681,7 @@
             // label30
             // 
             this.label30.AutoSize = true;
-            this.label30.Location = new System.Drawing.Point(200, 96);
+            this.label30.Location = new System.Drawing.Point(394, 100);
             this.label30.Name = "label30";
             this.label30.Size = new System.Drawing.Size(31, 13);
             this.label30.TabIndex = 17;
@@ -673,7 +690,7 @@
             // cbProject
             // 
             this.cbProject.FormattingEnabled = true;
-            this.cbProject.Location = new System.Drawing.Point(6, 117);
+            this.cbProject.Location = new System.Drawing.Point(200, 121);
             this.cbProject.Name = "cbProject";
             this.cbProject.Size = new System.Drawing.Size(184, 21);
             this.cbProject.Sorted = true;
@@ -683,7 +700,7 @@
             // label29
             // 
             this.label29.AutoSize = true;
-            this.label29.Location = new System.Drawing.Point(6, 96);
+            this.label29.Location = new System.Drawing.Point(200, 100);
             this.label29.Name = "label29";
             this.label29.Size = new System.Drawing.Size(40, 13);
             this.label29.TabIndex = 15;
@@ -717,10 +734,13 @@
             // 
             // dtFromTime
             // 
+            this.dtFromTime.CustomFormat = "dd.MM.yyyy HH:mm:ss";
+            this.dtFromTime.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
             this.dtFromTime.Location = new System.Drawing.Point(200, 26);
             this.dtFromTime.Name = "dtFromTime";
             this.dtFromTime.Size = new System.Drawing.Size(200, 20);
             this.dtFromTime.TabIndex = 11;
+            this.dtFromTime.ValueChanged += new System.EventHandler(this.dtFromTime_ValueChanged);
             // 
             // label27
             // 
@@ -752,16 +772,16 @@
             // 
             // txtNote2
             // 
-            this.txtNote2.Location = new System.Drawing.Point(6, 157);
+            this.txtNote2.Location = new System.Drawing.Point(6, 163);
             this.txtNote2.Multiline = true;
             this.txtNote2.Name = "txtNote2";
-            this.txtNote2.Size = new System.Drawing.Size(739, 348);
+            this.txtNote2.Size = new System.Drawing.Size(739, 342);
             this.txtNote2.TabIndex = 7;
             // 
             // label24
             // 
             this.label24.AutoSize = true;
-            this.label24.Location = new System.Drawing.Point(6, 141);
+            this.label24.Location = new System.Drawing.Point(3, 147);
             this.label24.Name = "label24";
             this.label24.Size = new System.Drawing.Size(30, 13);
             this.label24.TabIndex = 6;
@@ -779,7 +799,7 @@
             // label22
             // 
             this.label22.AutoSize = true;
-            this.label22.Location = new System.Drawing.Point(6, 3);
+            this.label22.Location = new System.Drawing.Point(6, 98);
             this.label22.Name = "label22";
             this.label22.Size = new System.Drawing.Size(68, 13);
             this.label22.TabIndex = 3;
@@ -788,7 +808,7 @@
             // cbActivity_Type
             // 
             this.cbActivity_Type.FormattingEnabled = true;
-            this.cbActivity_Type.Location = new System.Drawing.Point(6, 26);
+            this.cbActivity_Type.Location = new System.Drawing.Point(6, 121);
             this.cbActivity_Type.Name = "cbActivity_Type";
             this.cbActivity_Type.Size = new System.Drawing.Size(184, 21);
             this.cbActivity_Type.Sorted = true;
@@ -797,7 +817,7 @@
             // label21
             // 
             this.label21.AutoSize = true;
-            this.label21.Location = new System.Drawing.Point(200, 49);
+            this.label21.Location = new System.Drawing.Point(9, 3);
             this.label21.Name = "label21";
             this.label21.Size = new System.Drawing.Size(51, 13);
             this.label21.TabIndex = 1;
@@ -806,10 +826,39 @@
             // cbCompany
             // 
             this.cbCompany.FormattingEnabled = true;
-            this.cbCompany.Location = new System.Drawing.Point(200, 72);
+            this.cbCompany.Location = new System.Drawing.Point(9, 26);
             this.cbCompany.Name = "cbCompany";
             this.cbCompany.Size = new System.Drawing.Size(184, 21);
             this.cbCompany.TabIndex = 0;
+            // 
+            // dtToTime
+            // 
+            this.dtToTime.CustomFormat = "dd.MM.yyyy HH:mm:ss";
+            this.dtToTime.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
+            this.dtToTime.Location = new System.Drawing.Point(200, 72);
+            this.dtToTime.Name = "dtToTime";
+            this.dtToTime.Size = new System.Drawing.Size(200, 20);
+            this.dtToTime.TabIndex = 21;
+            this.dtToTime.ValueChanged += new System.EventHandler(this.dtToTime_ValueChanged);
+            // 
+            // label25
+            // 
+            this.label25.AutoSize = true;
+            this.label25.Location = new System.Drawing.Point(197, 49);
+            this.label25.Name = "label25";
+            this.label25.Size = new System.Drawing.Size(46, 13);
+            this.label25.TabIndex = 20;
+            this.label25.Text = "To Time";
+            // 
+            // button1
+            // 
+            this.button1.Location = new System.Drawing.Point(406, 71);
+            this.button1.Name = "button1";
+            this.button1.Size = new System.Drawing.Size(75, 21);
+            this.button1.TabIndex = 22;
+            this.button1.Text = "Now";
+            this.button1.UseVisualStyleBackColor = true;
+            this.button1.Click += new System.EventHandler(this.button1_Click);
             // 
             // TimeTracker
             // 
@@ -910,6 +959,9 @@
         private System.Windows.Forms.ComboBox cbProject1;
         private System.Windows.Forms.ComboBox cbActivityType1;
         private System.Windows.Forms.Button btnAdd;
+        private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.DateTimePicker dtToTime;
+        private System.Windows.Forms.Label label25;
     }
 }
 
