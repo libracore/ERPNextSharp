@@ -185,6 +185,42 @@ namespace TimeTracker
         #endregion
 
         #region event handler
+        private void dtStart_Detail_ValueChanged(object sender, EventArgs e)
+        {
+            setHour();
+        }
+
+        private void dtEnd_Detail_ValueChanged(object sender, EventArgs e)
+        {
+            setHour();
+        }
+
+        private void cbProject1_SelectedValueChanged(object sender, EventArgs e)
+        {
+            if (client != null)
+            {
+                List<ERPObject> si = client.ListObjects(DocType.Task);
+                cbTask1.Items.Clear();
+                foreach (ERPObject a in si)
+                {
+                    ERPObject obj = client.GetObject(DocType.Task, a.Name);
+                    ERPNextSharp.DocTypes.Stock.Task task = new ERPNextSharp.DocTypes.Stock.Task(obj);
+                    if (task.project == cbProject1.Text)
+                    {
+                        cbTask1.Items.Add(a.Name);
+                    }
+                }
+                if (cbTask1.Items.Count > 0)
+                {
+                    cbTask1.Text = cbTask1.Items[0].ToString();
+                }
+                else
+                {
+                    cbTask1.Text = "";
+                }
+            }
+        }
+
         private void dtToTime_ValueChanged(object sender, EventArgs e)
         {
             setHours();
@@ -664,40 +700,6 @@ namespace TimeTracker
         }
         #endregion
 
-        private void dtStart_Detail_ValueChanged(object sender, EventArgs e)
-        {
-            setHour();
-        }
-
-        private void dtEnd_Detail_ValueChanged(object sender, EventArgs e)
-        {
-            setHour();
-        }
-
-        private void cbProject1_SelectedValueChanged(object sender, EventArgs e)
-        {
-            if (client != null)
-            {
-                List<ERPObject> si = client.ListObjects(DocType.Task);
-                cbTask1.Items.Clear();
-                foreach (ERPObject a in si)
-                {
-                    ERPObject obj = client.GetObject(DocType.Task, a.Name);
-                    ERPNextSharp.DocTypes.Stock.Task task = new ERPNextSharp.DocTypes.Stock.Task(obj);
-                    if (task.project == cbProject1.Text)
-                    {
-                        cbTask1.Items.Add(a.Name);
-                    }
-                }
-                if (cbTask1.Items.Count > 0)
-                {
-                    cbTask1.Text = cbTask1.Items[0].ToString();
-                }
-                else
-                {
-                    cbTask1.Text = "";
-                }
-            }
-        }
+        
     }
 }
