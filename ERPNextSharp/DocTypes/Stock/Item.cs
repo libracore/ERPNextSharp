@@ -1,4 +1,6 @@
 ﻿using ERPNextSharp.Data;
+using System.Collections.Generic;
+using System.Linq;
 
 namespace ERPNextSharp.DocTypes.Stock
 {
@@ -16,7 +18,15 @@ namespace ERPNextSharp.DocTypes.Stock
         {
         }
         #endregion
+        #region JSON serializer
+        public IDictionary<string, object> GetDictionary()
+        {
+            // cast to an IDictionary<string, object>
+            IDictionary<string, object> dict = data;
 
+            return dict;
+        }
+        #endregion
         #region variable access
         public string ItemCode
         {
@@ -112,6 +122,34 @@ namespace ERPNextSharp.DocTypes.Stock
         {
             get { return data.publish_in_hub; }
             set { data.publish_in_hub = value; }
+        }
+
+        public string is_stock_item
+        {
+            get { return data.is_stock_item; }
+            set { data.is_stock_item = value; }
+        }
+
+        public ItemSupplier[] Supplier_items
+        {
+            get
+            {
+                List<ItemSupplier> Supplier_items = new List<ItemSupplier>();
+                for (int i = 0; i < data.items.Count; i++)
+                {
+                    Supplier_items.Add(new ItemSupplier(data.Supplier_items[i]));
+
+                }
+                return Supplier_items.ToArray();
+            }
+            set
+            {
+                data.Supplier_items = new IDictionary<string, object>[value.Length];
+                for (int i = 0; i < value.Length; i++)
+                {
+                    data.Supplier_items[i] = value[i].GetDictionary();
+                }
+            }
         }
 
         #region iGLOi specific variables

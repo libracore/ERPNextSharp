@@ -308,9 +308,12 @@ namespace ItemImporter
                 for (int i = 0; i <= anz_rows - 2; i++)
                 {
                     Item item = new Item();
+                    ItemSupplier itemSupplier = new ItemSupplier();
+                    bool Sub = false;
 
                     for (int y = 0; y <= anz_col - 1; y++)
                     {
+                        #region Fields of main doctype
                         if (dataGridView1.Columns[y].HeaderText == "Item_code")
                         {
                             item.ItemCode = dataGridView1[y, i].Value.ToString();
@@ -371,10 +374,36 @@ namespace ItemImporter
                         {
                             item.publish_in_hub = dataGridView1[y, i].Value.ToString();
                         }
+                        if (dataGridView1.Columns[y].HeaderText == "is_stock_item")
+                        {
+                            item.is_stock_item = dataGridView1[y, i].Value.ToString();
+                        }
+                        #endregion
+                        #region Fields of subtable "Item Supplier"
+                        if (dataGridView1.Columns[y].HeaderText == "supplier")
+                        {
+                            itemSupplier.supplier = dataGridView1[y, i].Value.ToString();
+                            Sub = true;
+                        }
+                        if (dataGridView1.Columns[y].HeaderText == "supplier_part_no")
+                        {
+                            itemSupplier.supplier_part_no = dataGridView1[y, i].Value.ToString();
+                            Sub = true;
+                        }
+                        
+                        #endregion
                     }
-
+                    if (Sub == true)
+                    {
+                        itemSupplier.parent = item.ItemCode;
+                        itemSupplier.parentfield = "supplier_items";
+                        itemSupplier.parenttype = "Item";
+                        ERPObject obj1 = itemSupplier.Object;
+                        client.InsertObject(obj1);
+                    }
                     ERPObject obj = item.Object;
                     client.InsertObject(obj);
+                    
                     dataGridView1.Rows[i].DefaultCellStyle.BackColor = Color.Green;
                 }
                 MessageBox.Show("Import done", "Succesfull", MessageBoxButtons.OK, MessageBoxIcon.Information);

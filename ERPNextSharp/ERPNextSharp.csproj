@@ -63,6 +63,7 @@
     <Compile Include="DocTypes\Projects\ActivityType.cs" />
     <Compile Include="DocTypes\Projects\TimesheetDetail.cs" />
     <Compile Include="DocTypes\Projects\Timesheet.cs" />
+    <Compile Include="DocTypes\Stock\ItemSupplier.cs" />
     <Compile Include="DocTypes\Stock\PricingRule.cs" />
     <Compile Include="DocTypes\Stock\ItemPrice.cs" />
     <Compile Include="DocTypes\Stock\PriceList.cs" />

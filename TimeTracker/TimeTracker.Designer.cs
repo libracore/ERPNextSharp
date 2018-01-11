@@ -80,6 +80,9 @@
             this.listTimeSheets = new System.Windows.Forms.ListBox();
             this.label4 = new System.Windows.Forms.Label();
             this.tabPage2 = new System.Windows.Forms.TabPage();
+            this.button1 = new System.Windows.Forms.Button();
+            this.dtToTime = new System.Windows.Forms.DateTimePicker();
+            this.label25 = new System.Windows.Forms.Label();
             this.btnNow = new System.Windows.Forms.Button();
             this.cbTask = new System.Windows.Forms.ComboBox();
             this.label30 = new System.Windows.Forms.Label();
@@ -99,9 +102,6 @@
             this.cbActivity_Type = new System.Windows.Forms.ComboBox();
             this.label21 = new System.Windows.Forms.Label();
             this.cbCompany = new System.Windows.Forms.ComboBox();
-            this.dtToTime = new System.Windows.Forms.DateTimePicker();
-            this.label25 = new System.Windows.Forms.Label();
-            this.button1 = new System.Windows.Forms.Button();
             this.groupBox1.SuspendLayout();
             this.statusStrip1.SuspendLayout();
             this.tabControl1.SuspendLayout();
@@ -199,10 +199,10 @@
             this.statusStrip1.ImageScalingSize = new System.Drawing.Size(24, 24);
             this.statusStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.statusConnected});
-            this.statusStrip1.Location = new System.Drawing.Point(0, 250);
+            this.statusStrip1.Location = new System.Drawing.Point(0, 217);
             this.statusStrip1.Name = "statusStrip1";
             this.statusStrip1.Padding = new System.Windows.Forms.Padding(2, 0, 21, 0);
-            this.statusStrip1.Size = new System.Drawing.Size(385, 29);
+            this.statusStrip1.Size = new System.Drawing.Size(355, 29);
             this.statusStrip1.TabIndex = 6;
             this.statusStrip1.Text = "statusStrip1";
             // 
@@ -659,6 +659,35 @@
             this.tabPage2.Text = "Create";
             this.tabPage2.UseVisualStyleBackColor = true;
             // 
+            // button1
+            // 
+            this.button1.Location = new System.Drawing.Point(406, 71);
+            this.button1.Name = "button1";
+            this.button1.Size = new System.Drawing.Size(75, 21);
+            this.button1.TabIndex = 22;
+            this.button1.Text = "Now";
+            this.button1.UseVisualStyleBackColor = true;
+            this.button1.Click += new System.EventHandler(this.button1_Click);
+            // 
+            // dtToTime
+            // 
+            this.dtToTime.CustomFormat = "dd.MM.yyyy HH:mm:ss";
+            this.dtToTime.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
+            this.dtToTime.Location = new System.Drawing.Point(200, 72);
+            this.dtToTime.Name = "dtToTime";
+            this.dtToTime.Size = new System.Drawing.Size(200, 20);
+            this.dtToTime.TabIndex = 21;
+            this.dtToTime.ValueChanged += new System.EventHandler(this.dtToTime_ValueChanged);
+            // 
+            // label25
+            // 
+            this.label25.AutoSize = true;
+            this.label25.Location = new System.Drawing.Point(197, 49);
+            this.label25.Name = "label25";
+            this.label25.Size = new System.Drawing.Size(46, 13);
+            this.label25.TabIndex = 20;
+            this.label25.Text = "To Time";
+            // 
             // btnNow
             // 
             this.btnNow.Location = new System.Drawing.Point(406, 26);
@@ -831,38 +860,9 @@
             this.cbCompany.Size = new System.Drawing.Size(184, 21);
             this.cbCompany.TabIndex = 0;
             // 
-            // dtToTime
-            // 
-            this.dtToTime.CustomFormat = "dd.MM.yyyy HH:mm:ss";
-            this.dtToTime.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
-            this.dtToTime.Location = new System.Drawing.Point(200, 72);
-            this.dtToTime.Name = "dtToTime";
-            this.dtToTime.Size = new System.Drawing.Size(200, 20);
-            this.dtToTime.TabIndex = 21;
-            this.dtToTime.ValueChanged += new System.EventHandler(this.dtToTime_ValueChanged);
-            // 
-            // label25
-            // 
-            this.label25.AutoSize = true;
-            this.label25.Location = new System.Drawing.Point(197, 49);
-            this.label25.Name = "label25";
-            this.label25.Size = new System.Drawing.Size(46, 13);
-            this.label25.TabIndex = 20;
-            this.label25.Text = "To Time";
-            // 
-            // button1
-            // 
-            this.button1.Location = new System.Drawing.Point(406, 71);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(75, 21);
-            this.button1.TabIndex = 22;
-            this.button1.Text = "Now";
-            this.button1.UseVisualStyleBackColor = true;
-            this.button1.Click += new System.EventHandler(this.button1_Click);
-            // 
             // TimeTracker
             // 
-            this.ClientSize = new System.Drawing.Size(385, 279);
+            this.ClientSize = new System.Drawing.Size(355, 246);
             this.Controls.Add(this.tabControl1);
             this.Controls.Add(this.statusStrip1);
             this.Controls.Add(this.groupBox1);

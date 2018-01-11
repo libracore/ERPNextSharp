@@ -313,7 +313,6 @@ namespace TimeTracker
             cbActivityType1.Text = cbActivityType1.Items[0].ToString();
             cbActivityType1.Enabled = true;
             txtHour.Text = "";
-            txtHour.Enabled = true;
             cbProject1.Text = cbProject1.Items[0].ToString();
             cbProject1.Enabled = true;
             cbTask1.Text = cbTask1.Items[0].ToString();
@@ -348,15 +347,9 @@ namespace TimeTracker
                 TimesheetDetail timesheetdetail = new TimesheetDetail();
 
                 timesheetdetail.activity_type = cbActivityType1.Text;
-                if (txtHour.Text != "")
-                {
-                    timesheetdetail.hours = Convert.ToInt32(txtHour.Text);
-                }
-                else
-                {
-                    timesheetdetail.hours = 1;
-                }
                 timesheetdetail.from_time = dtStart_Detail.Value;
+                timesheetdetail.to_time = dtEnd_Detail.Value;
+                timesheetdetail.hours = Convert.ToDouble(txtHour.Text);
                 timesheetdetail.project = cbProject1.Text;
                 timesheetdetail.task = cbTask1.Text;
                 timesheetdetail.parent = listTimeSheets.SelectedItem.ToString();
@@ -386,6 +379,7 @@ namespace TimeTracker
                 cbProject1.Enabled = false;
                 cbTask1.Enabled = false;
                 dtStart_Detail.Enabled = false;
+                dtEnd_Detail.Enabled = false;
                 btnAdd.Visible = false;
                 btnAddTimeLog.Enabled = true;
                 btnEdit.Enabled = true;
