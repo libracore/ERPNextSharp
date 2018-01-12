@@ -35,22 +35,34 @@ namespace libracoreTimeTracker
         {
             LoginHooks();
         }
+        private void pictureBox1_MouseMove(object sender, MouseEventArgs e)
+        {
+            Cursor = Cursors.Help;
+        }
+        private void pictureBox1_MouseLeave(object sender, EventArgs e)
+        {
+            Cursor = Cursors.Default;
+        }
         #endregion
 
         #region Button handler
         private void btnCreate_Click(object sender, EventArgs e)
         {
+            Cursor = Cursors.AppStarting;
             Create create = new Create();
             create.client = client;
             create.method = "create";
             create.ShowDialog();
+            Cursor = Cursors.Default;
         }
         private void btnAddEdit_Click(object sender, EventArgs e)
         {
+            Cursor = Cursors.AppStarting;
             Create create = new Create();
             create.client = client;
             create.method = "add";
             create.ShowDialog();
+            Cursor = Cursors.Default;
         }
         private void btnView_Click(object sender, EventArgs e)
         {
@@ -59,6 +71,10 @@ namespace libracoreTimeTracker
             viewer.client = client;
             viewer.ShowDialog();
             Cursor = Cursors.Default;
+        }
+        private void pictureBox1_Click(object sender, EventArgs e)
+        {
+            System.Diagnostics.Process.Start("https://libracore.com");
         }
         #endregion
 
@@ -96,7 +112,10 @@ namespace libracoreTimeTracker
                 this.Close();
             }
         }
+
         #endregion
+
+        
 
         
     }

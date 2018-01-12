@@ -31,6 +31,9 @@
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
+  <PropertyGroup>
+    <ApplicationIcon>favicon.ico</ApplicationIcon>
+  </PropertyGroup>
   <ItemGroup>
     <Reference Include="ERPNextSharp">
       <HintPath>..\..\ERPNextSharp\bin\Debug\ERPNextSharp.dll</HintPath>
@@ -151,6 +154,7 @@
       <SubType>Designer</SubType>
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
+    <Content Include="favicon.ico" />
     <None Include="Resources\save.png" />
     <None Include="Resources\libracore_wordmark.png" />
   </ItemGroup>
