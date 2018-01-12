@@ -2,7 +2,7 @@
 using System;
 using System.Collections.Generic;
 
-namespace Tests
+namespace libracoreTimeTracker
 {
     public class Config
     {
@@ -38,7 +38,7 @@ namespace Tests
             set { password = value; }
         }
         #endregion
-
+        
         #region loader
         private void load(string filename)
         {

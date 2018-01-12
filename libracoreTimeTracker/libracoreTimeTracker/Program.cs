@@ -4,7 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
-namespace TimeTracker
+namespace libracoreTimeTracker
 {
     static class Program
     {
@@ -16,7 +16,7 @@ namespace TimeTracker
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new TimeTracker());
+            Application.Run(new Main());
         }
     }
 }

@@ -5,12 +5,12 @@ using System.Runtime.InteropServices;
 // Allgemeine Informationen über eine Assembly werden über die folgenden
 // Attribute gesteuert. Ändern Sie diese Attributwerte, um die Informationen zu ändern,
 // die einer Assembly zugeordnet sind.
-[assembly: AssemblyTitle("TimeTracker")]
+[assembly: AssemblyTitle("libracoreTimeTracker")]
 [assembly: AssemblyDescription("")]
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("")]
-[assembly: AssemblyProduct("TimeTracker")]
-[assembly: AssemblyCopyright("Copyright © libracore 2018")]
+[assembly: AssemblyProduct("libracoreTimeTracker")]
+[assembly: AssemblyCopyright("Copyright ©  2018")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
 
@@ -20,7 +20,7 @@ using System.Runtime.InteropServices;
 [assembly: ComVisible(false)]
 
 // Die folgende GUID bestimmt die ID der Typbibliothek, wenn dieses Projekt für COM verfügbar gemacht wird
-[assembly: Guid("80c6065d-0896-4219-8805-ff407f98d3cd")]
+[assembly: Guid("045eb38f-67f9-40e1-934b-8c50e3f1dc22")]
 
 // Versionsinformationen für eine Assembly bestehen aus den folgenden vier Werten:
 //

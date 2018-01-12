@@ -1,6 +1,6 @@
 ﻿using ERPNextSharp.Data;
 
-namespace ERPNextSharp.DocTypes.Stock
+namespace ERPNextSharp.DocTypes.HR
 {
     /// <summary>
     /// Reference: https://frappe.github.io/erpnext/current/models/stock/item
@@ -18,11 +18,11 @@ namespace ERPNextSharp.DocTypes.Stock
         #endregion
 
         #region variable access
-        //public string user_id
-        //{
-        //    get { return data.prefered_email; }
-        //    set { data.prefered_email = value; }
-        //}
+        public string Employee_name
+        {
+            get { return data.employee_name; }
+            set { data.employee_name = value; }
+        }
 
         #endregion
     }

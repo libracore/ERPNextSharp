@@ -1,7 +1,7 @@
 ﻿using ERPNextSharp.Data;
 using System.Collections.Generic;
 
-namespace ERPNextSharp.DocTypes.Stock
+namespace ERPNextSharp.DocTypes.Project
 {
     /// <summary>
     /// Reference: https://frappe.github.io/erpnext/current/models/stock/item

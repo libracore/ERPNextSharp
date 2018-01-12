@@ -11,7 +11,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BankingConnector", "Banking
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Importer", "ItemImporter\Importer.csproj", "{AD33D216-FB90-40FF-9669-7FEE88A197FA}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TimeTracker", "TimeTracker\TimeTracker.csproj", "{80C6065D-0896-4219-8805-FF407F98D3CD}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "libracoreTimeTracker", "libracoreTimeTracker\libracoreTimeTracker\libracoreTimeTracker.csproj", "{045EB38F-67F9-40E1-934B-8C50E3F1DC22}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -35,10 +35,10 @@ Global
 		{AD33D216-FB90-40FF-9669-7FEE88A197FA}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{AD33D216-FB90-40FF-9669-7FEE88A197FA}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{AD33D216-FB90-40FF-9669-7FEE88A197FA}.Release|Any CPU.Build.0 = Release|Any CPU
-		{80C6065D-0896-4219-8805-FF407F98D3CD}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{80C6065D-0896-4219-8805-FF407F98D3CD}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{80C6065D-0896-4219-8805-FF407F98D3CD}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{80C6065D-0896-4219-8805-FF407F98D3CD}.Release|Any CPU.Build.0 = Release|Any CPU
+		{045EB38F-67F9-40E1-934B-8C50E3F1DC22}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{045EB38F-67F9-40E1-934B-8C50E3F1DC22}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{045EB38F-67F9-40E1-934B-8C50E3F1DC22}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{045EB38F-67F9-40E1-934B-8C50E3F1DC22}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

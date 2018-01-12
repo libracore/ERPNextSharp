@@ -10,6 +10,7 @@ using System.Windows.Forms;
 using ERPNextSharp;
 using ERPNextSharp.Data;
 using ERPNextSharp.DocTypes.Stock;
+using ERPNextSharp.DocTypes.Customer;
 using System.IO;
 using System.Text.RegularExpressions;
 
@@ -703,6 +704,139 @@ namespace ItemImporter
         private void listItems_SelectedIndexChanged(object sender, EventArgs e)
         {
 
+        }
+
+        private void btnInsertCustomerTable_Click(object sender, EventArgs e)
+        {
+            DataObject o = (DataObject)Clipboard.GetDataObject();
+            if (o.GetDataPresent(DataFormats.Text))
+            {
+                if (dataGridView4.RowCount > 0)
+                    dataGridView4.Rows.Clear();
+
+                if (dataGridView4.ColumnCount > 0)
+                    dataGridView4.Columns.Clear();
+
+                bool columnsAdded = false;
+                string[] pastedRows = Regex.Split(o.GetData(DataFormats.Text).ToString().TrimEnd("\r\n".ToCharArray()), "\r\n");
+                int j = 0;
+                foreach (string pastedRow in pastedRows)
+                {
+                    string[] pastedRowCells = pastedRow.Split(new char[] { '\t' });
+
+                    if (!columnsAdded)
+                    {
+                        for (int i = 0; i < pastedRowCells.Length; i++)
+                            dataGridView4.Columns.Add("col" + i, pastedRowCells[i]);
+
+                        columnsAdded = true;
+                        continue;
+                    }
+
+                    dataGridView4.Rows.Add();
+                    int myRowIndex = dataGridView4.Rows.Count - 1;
+
+                    using (DataGridViewRow myDataGridViewRow = dataGridView4.Rows[j])
+                    {
+                        for (int i = 0; i < pastedRowCells.Length; i++)
+                            myDataGridViewRow.Cells[i].Value = pastedRowCells[i];
+                    }
+                    j++;
+                }
+            }
+        }
+
+        private void btnInsertCustomer_Click(object sender, EventArgs e)
+        {
+            if (dataGridView4.RowCount > 0)
+            {
+                CheckColumnsCustomer();
+            }
+            else
+            {
+                MessageBox.Show("Please insert first an customer table", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
+
+        private void CheckColumnsCustomer()
+        {
+            //!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+            int anz_col = dataGridView4.ColumnCount;
+            Boolean customer_name = false;
+            Boolean customer_type = false;
+            Boolean customer_group = false;
+            Boolean territory = false;
+
+            for (int i = 0; i <= anz_col - 1; i++)
+            {
+                if (dataGridView4.Columns[i].HeaderText == "customer_name")
+                {
+                    customer_name = true;
+                }
+                if (dataGridView4.Columns[i].HeaderText == "customer_type")
+                {
+                    customer_type = true;
+                }
+                if (dataGridView4.Columns[i].HeaderText == "customer_group")
+                {
+                    customer_group = true;
+                }
+                if (dataGridView4.Columns[i].HeaderText == "territory")
+                {
+                    territory = true;
+                }
+            }
+
+            if (!territory || !customer_group || !customer_type ||!customer_name)
+            {
+                MessageBox.Show("Die Tabelle muss mindestens folgende Spalten aufweisen:" + Environment.NewLine
+                    + "customer_name, customer_type, customer_group, territory", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+            else
+            {
+                insertCustomer();
+            }
+        }
+        private void insertCustomer()
+        {
+            if (client != null)
+            {
+                int anz_rows = dataGridView4.RowCount;
+                int anz_col = dataGridView4.ColumnCount;
+                for (int i = 0; i <= anz_rows - 2; i++)
+                {
+                    Customer customer = new Customer();
+
+                    for (int y = 0; y <= anz_col - 1; y++)
+                    {
+                        if (dataGridView4.Columns[y].HeaderText == "customer_name")
+                        {
+                            customer.CustomerName = dataGridView4[y, i].Value.ToString();
+                        }
+                        if (dataGridView4.Columns[y].HeaderText == "customer_type")
+                        {
+                            customer.Customer_type = dataGridView4[y, i].Value.ToString();
+                        }
+                        if (dataGridView4.Columns[y].HeaderText == "customer_group")
+                        {
+                            customer.CustomerGroup = dataGridView4[y, i].Value.ToString();
+                        }
+                        if (dataGridView4.Columns[y].HeaderText == "territory")
+                        {
+                            customer.Territory = dataGridView4[y, i].Value.ToString();
+                        }
+                    }
+
+                    ERPObject obj = customer.Object;
+                    client.InsertObject(obj);
+                    dataGridView4.Rows[i].DefaultCellStyle.BackColor = Color.Green;
+                }
+                MessageBox.Show("Import done", "Succesfull", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            }
+            else
+            {
+                MessageBox.Show("Please login first", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
         }
     }
 }

@@ -22,6 +22,12 @@ namespace ERPNextSharp.DocTypes.Customer
             set { data.customer_type = value.ToString(); }
         }
 
+        public string Customer_type
+        {
+            get { return data.customer_type; }
+            set { data.customer_type = value; }
+        }
+
         public string CustomerName
         {
             get { return data.customer_name; }

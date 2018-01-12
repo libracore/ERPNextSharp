@@ -1,6 +1,6 @@
 ﻿using ERPNextSharp.Data;
 
-namespace ERPNextSharp.DocTypes.Stock
+namespace ERPNextSharp.DocTypes.Project
 {
     /// <summary>
     /// Reference: https://frappe.github.io/erpnext/current/models/stock/item
@@ -23,7 +23,16 @@ namespace ERPNextSharp.DocTypes.Stock
             get { return data.project; }
             set { data.project = value; }
         }
-
+        public string description
+        {
+            get { return data.description; }
+            set { data.description = value; }
+        }
+        public string subject
+        {
+            get { return data.subject; }
+            set { data.subject = value; }
+        }
         #endregion
     }
 }

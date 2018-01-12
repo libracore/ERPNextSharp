@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace TimeTracker.Properties
+namespace libracoreTimeTracker.Properties
 {
 
 
