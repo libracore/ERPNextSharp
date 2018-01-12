@@ -315,7 +315,7 @@
             this.groupBox3.Size = new System.Drawing.Size(452, 223);
             this.groupBox3.TabIndex = 23;
             this.groupBox3.TabStop = false;
-            this.groupBox3.Text = "groupBox3";
+            this.groupBox3.Text = "Project";
             this.groupBox3.Visible = false;
             // 
             // label10
@@ -533,7 +533,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 14F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(749, 524);
+            this.ClientSize = new System.Drawing.Size(762, 524);
             this.Controls.Add(this.groupBox3);
             this.Controls.Add(this.groupBox2);
             this.Controls.Add(this.groupBox1);

@@ -112,7 +112,9 @@ namespace libracoreTimeTracker
         #region Event handler
         private void Viewer_Load(object sender, EventArgs e)
         {
+            MessageBox.Show("This modul is under construction!", "Caution", MessageBoxButtons.OK, MessageBoxIcon.Warning);
             showTree();
+            this.Width = 303;
         }
         private void treeView1_NodeMouseDoubleClick(object sender, TreeNodeMouseClickEventArgs e)
         {
@@ -120,7 +122,16 @@ namespace libracoreTimeTracker
             {
                 groupBox1.Visible = true;
                 groupBox2.Visible = false;
-                groupBox3.Visible = true;
+                                
+                if (treeView1.SelectedNode.Parent.Text == "Timesheets without Project")
+                {
+                    groupBox3.Visible = false;
+                }
+                else
+                {
+                    groupBox3.Visible = true;
+                }
+                this.Width = 765;
             }
             else
             {
@@ -129,18 +140,40 @@ namespace libracoreTimeTracker
                     if (treeView1.SelectedNode.Parent.Text.Substring(0, 2) == "TS")
                     {
                         groupBox2.Visible = true;
-                        groupBox3.Visible = true;
+                        if (treeView1.SelectedNode.Parent.Parent.Text == "Timesheets without Project")
+                        {
+                            groupBox3.Visible = false;
+                        }
+                        else
+                        {
+                            groupBox3.Visible = true;
+                        }
+                        this.Width = 765;
                     }
                     else
                     {
-                        groupBox1.Visible = false;
-                        groupBox2.Visible = false;
-                        groupBox3.Visible = true;
+                        if(treeView1.SelectedNode.Text == "Timesheets without Project")
+                        {
+                            groupBox1.Visible = false;
+                            groupBox2.Visible = false;
+                            groupBox3.Visible = false;
+                            this.Width = 303;
+                        }
+                        else
+                        {
+                            groupBox1.Visible = false;
+                            groupBox2.Visible = false;
+                            groupBox3.Visible = true;
+                            this.Width = 765;
+                        }
                     }
                 }
                 catch
                 {
                     groupBox3.Visible = false;
+                    groupBox1.Visible = false;
+                    groupBox2.Visible = false;
+                    this.Width = 303;
                 }
             }
         }
